@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Button></Button>
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
   </div>
 </template>
 
@@ -10,6 +12,4 @@ import Button from '../components/ฺButton.vue';
 
 </script>
 
-<style>
-
-</style>
+<style></style>
