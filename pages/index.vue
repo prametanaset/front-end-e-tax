@@ -3,13 +3,13 @@
     <h1 class="text-3xl font-bold underline">
       Hello world!
     </h1>
-    <Button></Button>
+    <BaseButton size="md" rounded="md">
+      Button
+    </BaseButton>
   </div>
 </template>
 
 <script lang="ts" setup>
-
-import Button from '../components/ฺButton.vue';
 
 </script>
 
