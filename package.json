@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@shuriken-ui/nuxt": "^3.6.1",
+    "apexcharts": "^4.5.0",
     "nuxt": "^3.15.4",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vue3-apexcharts": "^1.8.0"
   },
   "packageManager": "pnpm@9.5.0-beta.1+sha512.5ffe23e95a4d4876d8885d4dea4c804d85495425140911b06c6c96a319e8c94bf9c6dad920b7d8e69a31ca291656b1c779aa6adc9b105f1a4fb5232487f99bf1",
   "devDependencies": {
+    "@iconify-json/material-symbols": "^1.2.15",
     "@vueuse/core": "^12.8.2"
   }
 }
