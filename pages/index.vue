@@ -3,9 +3,7 @@
     <h1 class="text-3xl font-bold underline">
       Hello world!
     </h1>
-    <BaseButton size="md" rounded="md">
-      Button
-    </BaseButton>
+    <Button></Button>
   </div>
 </template>
 
