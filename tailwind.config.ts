@@ -4,7 +4,14 @@ import colors from "tailwindcss/colors";
 export default withShurikenUI({
   content: [],
   theme: {
+    fontFamily: {
+      sans: ['IBM Plex Sans Thai', 'sans-serif'],
+      heading: ['IBM Plex Sans Thai', 'sans-serif'],
+      alt: ['IBM Plex Sans Thai', 'sans-serif'],
+      mono: ['IBM Plex Sans Thai', 'mono'],
+    },
     extend: {
+      
       colors: {
         primary: {
           100: "#E0D0FF",
@@ -18,7 +25,18 @@ export default withShurikenUI({
           900: "#3A0E4F",
         },
       },
-      nui: {},
+      nui: {
+        focus: {
+          mode: 'focus-visible',
+          width: '1',
+          style: 'none',
+          color: {
+            light: 'primary-500',
+            dark: 'primary-400',
+          }
+        }
+      },
+
     },
   },
 });
