@@ -1,20 +1,20 @@
 <template>
   <div class="grid grid-cols-2 gap-4">
-    <div class="min-w-[40%] flex flex-col justify-center md:col-span-2 lg:col-span-1">
+    <div class="min-w-[30%] flex flex-col justify-center md:col-span-2 lg:col-span-1">
       <BaseHeading as="h5" size="sm" weight="medium" lead="tight" class="text-muted-500 dark:text-muted-400">
-        <p>{{ props.title }}</p>
+        <p class="dark:text-[#B4B4B4]">{{ props.title }}</p>
       </BaseHeading>
       <BaseHeading as="h4" size="3xl" weight="bold" lead="tight" class="text-muted-800 dark:text-white sm:my-5 md:my-4  lg:my-5">
         <p>{{ props.countNumber }}</p>
       </BaseHeading>
       <div>
-        <p class="text-muted-500 text-sm"><span class="text-muted-700 font-semibold">{{ percenLastMonth > 0 ? percenLastMonth : percenLastMonth * -1 }}</span>
+        <p class="text-muted-500 text-sm dark:text-[#B4B4B4]"><span class="text-muted-700 font-semibold dark:text-white">{{ percenLastMonth > 0 ? percenLastMonth : percenLastMonth * -1 }}</span>
           ใบกำกับภาษี</p>
       </div>
     </div>
 
     <!-- Chard -->
-    <div class="min-w-[60%] flex flex-col items-end justify-between md:min-w-[60%] md:col-span-2 lg:col-span-1">
+    <div class="min-w-[70%] flex flex-col items-end justify-between md:min-w-[60%] md:col-span-2 lg:col-span-1">
       <div>
         <div class="flex items-center" :class="percenLastMonth > 0 ? 'text-success-400' : 'text-red-400'">
           <Icon :name="percenLastMonth > 0 ? 'lucide:chevron-up' : 'lucide:chevron-down'"
