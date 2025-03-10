@@ -193,7 +193,7 @@ const props = defineProps<{
       </Transition>
     </Menu>
     <div class="ml-3">
-      <h4 class="font-sans text-sm font-medium">Maya Rosselini</h4>
+      <h4 class="font-sans text-sm font-medium dark:text-white">Maya Rosselini</h4>
 
       <p class="text-muted-400 font-sans text-xs font-normal">
         Product Manager

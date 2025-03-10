@@ -7,7 +7,8 @@
 <script lang="ts" setup>
 definePageMeta({
   title: 'Profile Page',
-  description: 'โปรไฟล์'
+  description: 'โปรไฟล์',
+  layout: "custom"
 })
 </script>
 

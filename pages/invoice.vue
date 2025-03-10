@@ -7,7 +7,8 @@
 <script lang="ts" setup>
 definePageMeta({
   title: 'Invoice Page',
-  description: 'สร้างใบกำกับภาษี'
+  description: 'สร้างใบกำกับภาษี',
+  layout: "custom"
 })
 </script>
 

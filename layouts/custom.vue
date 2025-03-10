@@ -2,7 +2,7 @@
   <div class="flex min-h-screen">
     <!-- Sidebar -->
     <div
-      class="w-64 fixed sm:relative bg-[#FAF7FA] border-r border-gray-200 transition-transform duration-300 flex flex-col h-screen"
+      class="w-64 fixed sm:relative bg-[#FAF7FA] border-r border-gray-200 transition-transform duration-300 flex flex-col h-screen dark:bg-gray-800 dark:border-[#364559]"
       :class="isOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'"
     >
       <div class="py-4 px-6">
@@ -115,12 +115,12 @@
       </div>
     </div>
 
-    <div class="flex-1 transition-[2] duration-300 ease-in-out h-screen">
-      <div class="px-6 bg-[#FAFAFA] border-b">
+    <div class="flex-1 transition-[2] duration-300 ease-in-out h-screen dark:bg-[#0f172a]">
+      <div class="px-6 bg-[#FAFAFA] border-b dark:bg-[#0f172a] dark:border-b-[#364559]">
         <TairoSidebarToolbar></TairoSidebarToolbar>
       </div>
 
-      <div class="p-10 pb-0 bg-[#FAFAFA]">
+      <div class="p-10 pb-0 bg-[#FAFAFA] dark:bg-[#0f172a] dark:text-white">
         <h1
           class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800"
         >
