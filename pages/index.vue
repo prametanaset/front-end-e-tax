@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-[1440px] m-auto">
-    <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-6">
+    <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-10">
       <BaseCard shadow="flat" class="p-3 rounded w-full">
         <Widget
           class="w-full"

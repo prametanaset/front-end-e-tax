@@ -3,13 +3,12 @@ const app = useAppConfig()
 </script>
 
 <template>
-  <div class="flex items-center gap-7">
-    <BaseButton variant="outline" size="sm" color="success" class="pointer-events-none btn-outline-1">
+  <div class="flex items-center gap-5">
+    <BaseTag variant="pastel" size="md" color="success" class="pointer-events-none flex items-center gap-1">
       <Icon name="lucide:mail" class="-ms-1 size-4" />
 
-      <span>e-tax พร้อมใช้งาน</span>
-    </BaseButton>
-    <BaseThemeToggle />
+      <span class="text-xs">e-tax พร้อมใช้งาน</span>
+    </BaseTag>
     <TairoAccountMenu :horizontal="true" />
   </div>
 </template>
