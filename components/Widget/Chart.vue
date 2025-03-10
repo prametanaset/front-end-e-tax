@@ -1,13 +1,15 @@
 <template>
   <div>
-    <ApexChart
-      type="area"
-      height="80"
-      width="140"
-      :options="chartOptions1"
-      :series="areaChart1.series"
-    >
-    </ApexChart>
+    <ClientOnly>
+      <ApexChart
+        type="area"
+        :height="70"
+        :width="'90%'"
+        :options="chartOptions1"
+        :series="areaChart1.series"
+      >
+      </ApexChart>
+    </ClientOnly>
   </div>
 </template>
 
@@ -17,8 +19,6 @@ const chartOptions1 = computed(() => {
   return {
     chart: {
       type: "area",
-      height: 80,
-      width: 80,
       fontFamily: `inherit`,
       sparkline: {
         enabled: true,
@@ -55,48 +55,6 @@ const chartOptions1 = computed(() => {
         },
       },
     },
-    responsive: [
-      {
-        breakpoint: 600,
-        options: {
-          chart: {
-            width: "200",
-          },
-        },
-      },
-      {
-        breakpoint: 960,
-        options: {
-          chart: {
-            width: "400",
-          },
-        },
-      },
-      {
-        breakpoint: 1280,
-        options: {
-          chart: {
-            width: "100",
-          },
-        },
-      },
-      {
-        breakpoint: 1400,
-        options: {
-          chart: {
-            width: "60",
-          },
-        },
-      },
-      {
-        breakpoint: 1600,
-        options: {
-          chart: {
-            width: "100",
-          },
-        },
-      },
-    ],
   };
 });
 

@@ -155,7 +155,11 @@
 
   <div class="sm:ml-64 p-10">
     <div>
-      <h1 class="my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white">{{ route.meta.description }}</h1>
+      <h1
+        class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white"
+      >
+        {{ route.meta.description }}
+      </h1>
     </div>
     <div>
       <slot />
@@ -164,9 +168,7 @@
 </template>
 
 <script lang="ts" setup>
-const route = useRoute()
+const route = useRoute();
 </script>
-
-
 
 <style></style>
