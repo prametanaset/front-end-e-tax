@@ -3,8 +3,8 @@
     <ClientOnly>
       <ApexChart
         type="area"
-        :height="70"
-        :width="'90%'"
+        :height="'50'"
+        :width="'100%'"
         :options="chartOptions1"
         :series="areaChart1.series"
       >

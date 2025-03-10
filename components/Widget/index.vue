@@ -1,14 +1,30 @@
 <template>
-  <div class="flex sm:flex-row md:flex-col xl:flex-row">
-    <div class="flex-1">
-      <p class="text-sm mb-5 text-grey-400">{{ props.title }}</p>
-      <p class="text-4xl">{{ props.countNumber }}</p>
+  <div class="flex flex-row">
+    <div class="min-w-[30%] flex flex-col">
+      <BaseHeading
+        as="h5"
+        size="sm"
+        weight="medium"
+        lead="tight"
+        class="text-muted-500 dark:text-muted-400"
+      >
+        <p>{{ props.title }}</p>
+      </BaseHeading>
+      <BaseHeading
+        as="h4"
+        size="3xl"
+        weight="bold"
+        lead="tight"
+        class="text-muted-800 dark:text-white mt-5"
+      >
+        <p>{{ props.countNumber }}</p>
+      </BaseHeading>
     </div>
-    <div class="flex flex-col flex-1 items-end">
+    <div class="min-w-[70%] flex flex-col items-end">
       <div>
-        <p class="text-green-500">+{{ percenLastMonth }}%</p>
+        <p class="text-success-500">+{{ percenLastMonth }}%</p>
       </div>
-      <WidgetChart class="" />
+      <div class="w-full"><WidgetChart /></div>
     </div>
   </div>
 </template>
