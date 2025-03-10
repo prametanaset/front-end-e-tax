@@ -22,7 +22,7 @@
       </div>
 
       <div>
-        <BaseSelect v-model="perPage" label="" :classes="{
+        <BaseSelect v-model="perPage" rounded="md" label="" :classes="{
           wrapper: 'w-full sm:w-40',
         }">
           <option :value="10">
@@ -132,7 +132,7 @@
       </TairoTableRow>
     </TairoTable>
 
-    <div class="mt-6">
+    <div class="mt-3">
       <BasePagination :total-items="data?.total ?? 0" :item-per-page="perPage" :current-page="page" rounded="md" />
     </div>
 

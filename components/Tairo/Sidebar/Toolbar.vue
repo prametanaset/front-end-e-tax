@@ -30,7 +30,7 @@ const showNavBurger = computed(() => {
     class="relative z-[1] flex h-16 items-center gap-2"
     :class="props.horizontalScroll && 'pe-4 xl:pe-10'"
   >
-    <TairoSidebarBurger v-if="true" class="-ms-3 md:hidden lg:hidden " />
+    <TairoSidebarBurger v-if="true" class="-ms-3  " />
 
     <!-- <BaseHeading
       v-if="app.tairo?.sidebar?.toolbar?.showTitle" -->

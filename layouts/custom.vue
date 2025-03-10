@@ -2,8 +2,8 @@
   <div class="flex min-h-screen">
     <!-- Sidebar -->
     <div
-      class="w-64 z-10 fixed md:relative bg-[#ffffff] border-r border-gray-200 transition-transform duration-300 flex flex-col h-screen dark:bg-gray-800 dark:border-[#364559]"
-      :class="isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'">
+    class="bg-[#ffffff] border-r border-gray-200 transition-all duration-300 flex flex-col h-screen dark:bg-gray-800 dark:border-[#364559]"
+  :class="isOpen ? 'translate-x-0 max-w-64 w-64' : 'max-w-0 w-0 -translate-x-full md:w-64'">
 
       <div class="py-4 px-6">
         <!-- <div class="md:absolute top-3 left-3 md:hidden lg:hidden">
@@ -19,9 +19,10 @@
       </div>
 
       <!-- Sidebar Content with Main and Library Sections -->
-      <div class="flex flex-col z-10 h-full justify-between">
+      <div v-if="isOpen" class="flex flex-col h-full justify-between"
+      :class="isOpen ? 'translate-x-0 w-64' : 'w-0 -translate-x-full md:w-64'">
         <!-- Main Section -->
-        <div>
+        <div >
           <h3 class="mx-6 mb-2 text-xs text-gray-400 uppercase tracking-widest">
             เมนูหลัก
           </h3>
@@ -57,7 +58,7 @@
         <TairoSidebarToolbar></TairoSidebarToolbar>
       </div>
 
-      <div class="p-10 pb-0 dark:text-white">
+      <div class="p-5 dark:text-white">
         <h1
           class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white">
           {{ route.meta.description }}
@@ -71,6 +72,31 @@
 <script lang="ts" setup>
 const route = useRoute();
 const { isOpen } = useSidebar();
+
+const screenWidth = ref(0) // Start with 0 or a default value
+
+const updateWidth = () => {
+  screenWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  updateWidth() // Set initial width
+  window.addEventListener('resize', updateWidth)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWidth)
+})
+
+watch(screenWidth, (newWidth) => {
+  if (newWidth < 768) {
+    isOpen.value = false;
+  } 
+  if (newWidth > 1024) {
+    isOpen.value = true;
+  }
+});
+
 // isOpen.value = true;
 </script>
 
