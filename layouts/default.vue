@@ -147,13 +147,16 @@
             </svg>
 
             <span class="flex-1 ms-3 whitespace-nowrap">Setting</span>
+            <span class="flex-1 ms-3 whitespace-nowrap">
+              <BaseThemeSwitch
+            /></span>
           </a>
         </li>
       </ul>
     </div>
   </aside>
 
-  <div class="sm:ml-64 p-10">
+  <div class="sm:ml-64 p-10 min-w-[300px]">
     <div>
       <h1
         class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white"
