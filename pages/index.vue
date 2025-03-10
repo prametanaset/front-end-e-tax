@@ -49,6 +49,7 @@
 definePageMeta({
   title: "Home Page",
   description: "รายการใบแจ้งหนี้",
+  layout: "custom"
 });
 </script>
 
