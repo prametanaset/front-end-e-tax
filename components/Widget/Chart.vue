@@ -2,6 +2,7 @@
   <div>
     <ClientOnly>
       <ApexChart
+        class="dark:text-black"
         type="area"
         :height="'50'"
         :width="'100%'"

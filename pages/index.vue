@@ -26,10 +26,7 @@
         />
       </BaseCard>
 
-      <BaseCard
-        shadow="flat"
-        class="p-3 rounded sm:col-span-1 md:col-span-3 xl:col-span-1 !bg-primary-200 !dark:bg-primary-200 !border-primary-500 w-full"
-      >
+      <BaseCard shadow="flat" class="p-3 rounded w-full">
         <Widget
           class=""
           :title="'Widget name'"
@@ -49,7 +46,7 @@
 definePageMeta({
   title: "Home Page",
   description: "รายการใบแจ้งหนี้",
-  layout: "custom"
+  layout: "custom",
 });
 </script>
 
