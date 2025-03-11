@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- Search Data -->
-    <div class="flex flex-row mb-3 gap-3 items-end relative">
-      <div class="basis-4/12">
+    <div class="flex flex-row gap-4 mb-3 items-end justify-between">
+      <div class="flex-auto w-50">
         <BaseInput
           v-model="criteria.keyword"
           icon="lucide:search"
@@ -12,12 +12,34 @@
           placeholder="ค้นหาด้วยหมายเลขใบแจ้งหนี้"
         />
       </div>
-
-      <!-- Search button -->
-      <!-- <div class="basis-0.5/12">
-        <BaseButton color="primary" size="md" shadow="hover" class="w-full">
-          ค้นหา
-        </BaseButton>
+      <div class="flex-auto">
+        <Test
+          v-model="criteria.status"
+          label="สถานะ"
+          :properties="{
+            value: 'value',
+            label: 'label',
+          }"
+          :items="statusOption"
+          placeholder="ทั้งหมด"
+          rounded="md"
+          size="md"
+        />
+      </div>
+      <!-- <div>
+        <BaseSelect
+          v-model="perPage"
+          rounded="md"
+          label=""
+          :classes="{
+            wrapper: 'w-full sm:w-40',
+          }"
+        >
+          <option :value="10">10 per page</option>
+          <option :value="25">25 per page</option>
+          <option :value="50">50 per page</option>
+          <option :value="100">100 per page</option>
+        </BaseSelect>
       </div> -->
       <div class="flex-auto w-20">
         <BaseInput
@@ -319,24 +341,8 @@
       </TairoTableRow>
     </TairoTable>
 
-    <div class="mt-3 flex items-center justify-end gap-x-8">
-      <div class="mb-[2px]">
-        <BaseSelect
-          v-model="perPage"
-          rounded="md"
-          size="md"
-          label=""
-          :classes="{
-            wrapper: 'w-full w-40',
-          }"
-        >
-          <option :value="10">10 per page</option>
-          <option :value="25">25 per page</option>
-          <option :value="50">50 per page</option>
-          <option :value="100">100 per page</option>
-        </BaseSelect>
-      </div>
-      <CustomBasePagination
+    <div class="mt-3">
+      <BasePagination
         :total-items="data?.total ?? 0"
         :item-per-page="perPage"
         :current-page="page"
@@ -370,6 +376,8 @@ const page = computed(() => parseInt((route.query.page as string) ?? "1"));
 
 const criteria = reactive({
   keyword: "",
+  datefrom: "",
+  dateTo: "",
   status: {
     label: "ทั้งหมด",
     value: "",
@@ -475,4 +483,10 @@ const { data, pending, error, refresh } = await useFetch(
 );
 </script>
 
-<style></style>
+<style scoped>
+.vc-header {
+  font-family: "IBM Plex Sans Thai", sans-serif !important;
+  font-weight: 100;
+  font-style: normal;
+}
+</style>
