@@ -1,34 +1,43 @@
 <template>
   <div>
+
+    <!-- Search Data -->
     <div class="flex flex-row mb-3 gap-3 items-end relative">
       <div class="basis-4/12">
-        <BaseInput
-          v-model="criteria.keyword"
-          icon="lucide:search"
-          size="lg"
-          rounded="md"
-          label="ค้นหา"
-          placeholder="ค้นหาด้วยหมายเลขใบแจ้งหนี้"
-        />
+        <BaseInput v-model="criteria.keyword" icon="lucide:search" size="md" rounded="md" label="ค้นหา"
+          placeholder="ค้นหาด้วยหมายเลขใบแจ้งหนี้" />
       </div>
-      <div class="basis-0.5/12">
-        <BaseButton color="primary" size="lg" shadow="hover" class="w-full">
+
+      <!-- Search button -->
+      <!-- <div class="basis-0.5/12">
+        <BaseButton color="primary" size="md" shadow="hover" class="w-full">
           ค้นหา
         </BaseButton>
-      </div>
+      </div> -->
       <div class="basis-2/12">
-        <BaseListbox
-          v-model="criteria.status"
-          label="สถานะ"
-          :properties="{
-            value: 'value',
-            label: 'label',
-          }"
-          :items="statusOption"
-          placeholder="ทั้งหมด"
-          rounded="md"
-          size="lg"
-        />
+        <Test v-model="criteria.status" label="สถานะ" :properties="{
+          value: 'value',
+          label: 'label',
+        }" :items="statusOption" placeholder="ทั้งหมด" rounded="md" size="md" />
+      </div>
+
+      <div>
+        <BaseSelect v-model="perPage" rounded="md" label="" :classes="{
+          wrapper: 'w-full sm:w-40',
+        }">
+          <option :value="10">
+            10 per page
+          </option>
+          <option :value="25">
+            25 per page
+          </option>
+          <option :value="50">
+            50 per page
+          </option>
+          <option :value="100">
+            100 per page
+          </option>
+        </BaseSelect>
       </div>
       <div class="basis-2-12">
         <BaseInput
@@ -102,7 +111,19 @@
         />
       </div>
     </div>
-    <TairoTable rounded="md">
+
+    <div v-if="!pending && data?.data.length === 0">
+      <BasePlaceholderPage title="ไม่พบผลลัพธ์ที่ตรงกับคำค้นหาของคุณ" subtitle="ลองใช้คำค้นหาอื่นดูสิ">
+        <template #image>
+          <img class="block dark:hidden" src="/img/illustrations/placeholders/flat/placeholder-search-4.svg"
+            alt="Placeholder image">
+          <img class="hidden dark:block" src="/img/illustrations/placeholders/flat/placeholder-search-4-dark.svg"
+            alt="Placeholder image">
+        </template>
+      </BasePlaceholderPage>
+    </div>
+    <!-- Tariro Table -->
+    <TairoTable v-else rounded="md">
       <template #header>
         <TairoTableHeading uppercase class="p-4">
           <div class="flex items-center">
@@ -128,12 +149,7 @@
       <TairoTableRow v-for="member in team" :key="member.id">
         <TairoTableCell class="p-4">
           <div class="flex items-center">
-            <BaseCheckbox
-              v-model="selected"
-              :value="`table-4-${member.id}`"
-              rounded="md"
-              color="primary"
-            />
+            <BaseCheckbox v-model="selected" :value="`table-4-${member.id}`" rounded="md" color="primary" />
           </div>
         </TairoTableCell>
 
@@ -162,51 +178,42 @@
         <TairoTableCell>{{ member.rate }}</TairoTableCell>
 
         <TairoTableCell>
-          <BaseTag
-            v-if="member.status === 'Available'"
-            color="success"
-            variant="pastel"
-            rounded="full"
-            class="font-medium"
-          >
+          <BaseTag v-if="member.status === 'Available'" color="success" variant="pastel" rounded="full"
+            class="font-medium">
             {{ member.status }}
           </BaseTag>
 
-          <BaseTag
-            v-else-if="member.status === 'New'"
-            color="info"
-            variant="pastel"
-            rounded="full"
-            class="font-medium"
-          >
+          <BaseTag v-else-if="member.status === 'New'" color="info" variant="pastel" rounded="full" class="font-medium">
             {{ member.status }}
           </BaseTag>
 
-          <BaseTag
-            v-else-if="member.status === 'Hired'"
-            color="warning"
-            variant="pastel"
-            rounded="full"
-            class="font-medium"
-          >
+          <BaseTag v-else-if="member.status === 'Hired'" color="warning" variant="pastel" rounded="full"
+            class="font-medium">
             {{ member.status }}
           </BaseTag>
         </TairoTableCell>
 
-        <TairoTableCell>
-          <a
-            href="#"
-            class="text-primary-500 dark:text-primary-400 underline-offset-4 transition-opacity duration-300 hover:underline hover:opacity-75"
-          >
-            View
-          </a>
+        <TairoTableCell spaced>
+          <div class="flex justify-center">
+            <BaseDropdown variant="context" label="Dropdown" placement="bottom-end" rounded="md">
+              <BaseDropdownItem to="#" title="User" text="View details" rounded="md" />
+            </BaseDropdown>
+          </div>
         </TairoTableCell>
       </TairoTableRow>
     </TairoTable>
+
+    <div class="mt-3">
+      <BasePagination :total-items="data?.total ?? 0" :item-per-page="perPage" :current-page="page" rounded="md" />
+    </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
+const router = useRouter();
+const route = useRoute();
+
 import { Calendar } from "v-calendar";
 import "v-calendar/style.css";
 const selected = ref([]);
@@ -215,8 +222,11 @@ const openDateFrom = ref(false);
 const openDateTo = ref(false);
 
 const colorMode = useColorMode();
+const perPage = ref(10);
+const page = computed(() => parseInt((route.query.page as string) ?? '1'))
 
-const criteria = ref({
+
+const criteria = reactive({
   keyword: "",
   datefrom: "",
   dateTo: "",
@@ -314,6 +324,29 @@ const attributes = ref([
     ],
   },
 ]);
+
+watch([criteria.keyword, perPage], () => {
+  router.push({
+    query: {
+      page: undefined,
+    },
+  })
+})
+
+const query = computed(() => {
+  return {
+    filter: criteria.keyword,
+    perPage: perPage.value,
+    page: page.value,
+  }
+})
+
+const { data, pending, error, refresh } = await useFetch(
+  '/api/company/members/',
+  {
+    query,
+  },
+)
 </script>
 
 <style scoped>

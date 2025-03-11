@@ -31,9 +31,16 @@ export default withShurikenUI({
           width: '1',
           style: 'none',
           color: {
-            light: 'primary-500',
-            dark: 'primary-400',
+            light: 'violet-500',
+            dark: 'violet-400',
           }
+        },
+        card: {
+          shadow: {
+            light: 'purple-600/30',
+            dark: 'purple-800/30',
+            size: '2xl',
+          },
         }
       },
 

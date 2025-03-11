@@ -11,9 +11,15 @@ importers:
       '@headlessui/vue':
         specifier: ^1.7.23
         version: 1.7.23(vue@3.5.13(typescript@5.8.2))
+<<<<<<< HEAD
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
+=======
+      '@heroicons/vue':
+        specifier: ^2.2.0
+        version: 2.2.0(vue@3.5.13(typescript@5.8.2))
+>>>>>>> 7885a0ce9d0c6051f91a96a14a5885920c9e1a78
       '@shuriken-ui/nuxt':
         specifier: ^3.6.1
         version: 3.6.1(magicast@0.3.5)(nuxt@3.15.4(@parcel/watcher@2.5.1)(@types/node@22.13.9)(db0@0.3.1)(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(rollup@4.34.9)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0))(postcss@8.5.3)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
@@ -551,6 +557,11 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.2.0
+
+  '@heroicons/vue@2.2.0':
+    resolution: {integrity: sha512-G3dbSxoeEKqbi/DFalhRxJU4mTXJn7GwZ7ae8NuEQzd1bqdd0jAbdaBZlHPcvPD2xI1iGzNVB4k20Un2AguYPw==}
+    peerDependencies:
+      vue: '>= 3'
 
   '@iconify-json/material-symbols@1.2.15':
     resolution: {integrity: sha512-KkHRnMh1s08N1Olf3xk+z3ZIrke/7Ys3uUIMfKuSkZPbNssG4IApKkJOV5po6mg6oxMooXdNpab4PS0S5LMSOA==}
@@ -4266,6 +4277,10 @@ snapshots:
   '@headlessui/vue@1.7.23(vue@3.5.13(typescript@5.8.2))':
     dependencies:
       '@tanstack/vue-virtual': 3.13.2(vue@3.5.13(typescript@5.8.2))
+      vue: 3.5.13(typescript@5.8.2)
+
+  '@heroicons/vue@2.2.0(vue@3.5.13(typescript@5.8.2))':
+    dependencies:
       vue: 3.5.13(typescript@5.8.2)
 
   '@iconify-json/material-symbols@1.2.15':

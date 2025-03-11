@@ -11,7 +11,11 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
+<<<<<<< HEAD
     "@popperjs/core": "^2.11.8",
+=======
+    "@heroicons/vue": "^2.2.0",
+>>>>>>> 7885a0ce9d0c6051f91a96a14a5885920c9e1a78
     "@shuriken-ui/nuxt": "^3.6.1",
     "apexcharts": "^4.5.0",
     "nuxt": "^3.15.4",
