@@ -43,7 +43,7 @@
       </div> -->
       <div class="flex-auto w-20">
         <BaseInput
-          v-model="criteria.datefrom"
+          v-model="displayDateFrom"
           icon="line-md:calendar"
           size="md"
           readonly
@@ -51,7 +51,22 @@
           label="ระหว่างวันที่"
           placeholder="วว/ดด/ปปปป"
           @click="openDateFrom = true"
-        />
+          ><!-- reset data -->
+          <template #action v-if="displayDateFrom != ''">
+            <button
+              type="button"
+              data-nui-tooltip="ล้าง"
+              @click="(displayDateFrom = ''), (criteria.dateFrom = '')"
+              class="text-muted-400 hover:text-primary-500 absolute end-0 top-0 z-[1] flex size-8 items-center justify-center transition-colors duration-300"
+            >
+              <Icon
+                name="line-md:menu-to-close-alt-transition"
+                class="size-4 mt-2"
+              />
+            </button>
+          </template>
+          <!-- end reset data --></BaseInput
+        >
 
         <TairoModal
           :open="openDateFrom"
@@ -93,7 +108,9 @@
                   color="primary"
                   variant="solid"
                   @click="
-                    (openDateFrom = false), (criteria.datefrom = datePickTemp)
+                    (openDateFrom = false),
+                      (criteria.datefrom = datePickTemp),
+                      (displayDateFrom = formatThaiDate(datePickTemp))
                   "
                 >
                   ตกลง
@@ -105,14 +122,30 @@
       </div>
       <div class="flex-auto w-20">
         <BaseInput
-          v-model="criteria.dateTo"
+          v-model="displayDateTo"
           icon="line-md:calendar"
           size="md"
           rounded="md"
           label="ถึงวันที่"
           placeholder="วว/ดด/ปปปป"
           @click="openDateTo = true"
-        />
+        >
+          <!-- reset data -->
+          <template #action v-if="displayDateTo != ''">
+            <button
+              type="button"
+              data-nui-tooltip="ล้าง"
+              @click="(displayDateTo = ''), (criteria.dateTo = '')"
+              class="text-muted-400 hover:text-primary-500 absolute end-0 top-0 z-[1] flex size-8 items-center justify-center transition-colors duration-300"
+            >
+              <Icon
+                name="line-md:menu-to-close-alt-transition"
+                class="size-4 mt-2"
+              />
+            </button>
+          </template>
+          <!-- end reset data -->
+        </BaseInput>
         <TairoModal :open="openDateTo" size="sm" @close="openDateTo = false">
           <template #header>
             <!-- Header -->
@@ -149,7 +182,9 @@
                   color="primary"
                   variant="solid"
                   @click="
-                    (openDateTo = false), (criteria.dateTo = datePickTemp)
+                    (openDateTo = false),
+                      (criteria.dateTo = datePickTemp),
+                      (displayDateTo = formatThaiDate(datePickTemp))
                   "
                 >
                   ตกลง
@@ -175,7 +210,6 @@
         </BaseButton>
       </div>
     </div>
-
     <div v-if="!pending && data?.data.length === 0">
       <BasePlaceholderPage
         title="ไม่พบผลลัพธ์ที่ตรงกับคำค้นหาของคุณ"
@@ -320,14 +354,19 @@
 
 <script lang="ts" setup>
 import "v-calendar/style.css";
+import { format } from "date-fns";
 
 const router = useRouter();
 const route = useRoute();
 
 const selected = ref([]);
+
 const selectAll = ref(false);
 const openDateFrom = ref(false);
 const openDateTo = ref(false);
+
+const displayDateFrom = ref("");
+const displayDateTo = ref("");
 
 const datePickTemp = ref(new Date());
 
@@ -413,6 +452,20 @@ watch([criteria.keyword, perPage], () => {
     },
   });
 });
+
+watch(
+  [criteria.datefrom, criteria.dateTo],
+  ([newDateFrom, newDateTo]) => {
+    // console.log("fsdfsd");
+    // if (newDateFrom !== "") {
+    //   displayDateFrom.value = formatThaiDate(newDateFrom);
+    //   console.log(displayDateFrom.value);
+    // } else if (newDateTo !== "") {
+    //   displayDateTo.value = formatThaiDate(newDateTo);
+    // }
+  },
+  { deep: true }
+);
 
 const query = computed(() => {
   return {

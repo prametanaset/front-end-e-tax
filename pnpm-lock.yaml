@@ -20,6 +20,9 @@ importers:
       apexcharts:
         specifier: ^4.5.0
         version: 4.5.0
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       nuxt:
         specifier: ^3.15.4
         version: 3.15.4(@parcel/watcher@2.5.1)(@types/node@22.13.9)(db0@0.3.1)(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(rollup@4.34.9)(terser@5.39.0)(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.9)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(yaml@2.7.0)
@@ -1620,6 +1623,9 @@ packages:
   date-fns@2.30.0:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
+
+  date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   db0@0.3.1:
     resolution: {integrity: sha512-3RogPLE2LLq6t4YiFCREyl572aBjkfMvfwPyN51df00TbPbryL3XqBYuJ/j6mgPssPK8AKfYdLxizaO5UG10sA==}
@@ -5676,6 +5682,8 @@ snapshots:
   date-fns@2.30.0:
     dependencies:
       '@babel/runtime': 7.26.9
+
+  date-fns@4.1.0: {}
 
   db0@0.3.1: {}
 
