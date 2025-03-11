@@ -2,40 +2,63 @@
   <div class="flex min-h-screen">
     <!-- Sidebar -->
     <div
-    class="bg-[#ffffff] border-r border-gray-200 transition-all duration-300 flex flex-col h-screen dark:bg-gray-800 dark:border-[#364559]"
-  :class="isOpen ? 'translate-x-0 max-w-64 w-64' : 'max-w-0 w-0 -translate-x-full md:w-64'">
-
+      class="bg-[#ffffff] border-r border-gray-200 transition-all duration-300 flex flex-col h-screen dark:bg-gray-800 dark:border-[#364559]"
+      :class="
+        isOpen
+          ? 'translate-x-0 max-w-64 w-64'
+          : 'max-w-0 w-0 -translate-x-full md:w-64'
+      "
+    >
       <div class="py-4 px-6">
         <!-- <div class="md:absolute top-3 left-3 md:hidden lg:hidden">
           <TairoSidebarBurger></TairoSidebarBurger>
         </div> -->
         <a href="/">
           <svg class="w-full h-10" viewBox="0 0 69 40">
-            <path fill="#b038ff" fill-rule="evenodd"
+            <path
+              fill="#b038ff"
+              fill-rule="evenodd"
               d="M55.26 0v30.07h-7.13V1.5L55.26 0ZM34.94 32.92a3.55 3.55 0 0 1 3.57 3.54c0 1.96-1.6 3.54-3.57 3.54a3.55 3.55 0 0 1-3.56-3.54c0-1.95 1.6-3.54 3.56-3.54Zm0-24.38c6.08 0 11.02 4.89 11.02 10.92s-4.94 10.92-11.02 10.92a10.96 10.96 0 0 1-11-10.92c0-6.03 4.93-10.92 11-10.92Zm0 14.46a3.55 3.55 0 0 0 3.57-3.54c0-1.96-1.6-3.54-3.57-3.54a3.55 3.55 0 0 0-3.56 3.54c0 1.96 1.6 3.54 3.56 3.54ZM12.5 23c1.23 0 2.23-1 2.23-2.21 0-1.22-1-2.22-2.23-2.22H7.15V23h5.35ZM7.15 7.08v4.42h3.96c1.23 0 2.23-1 2.23-2.21 0-1.22-1-2.21-2.23-2.21H7.15Zm11.92 7.1a9.19 9.19 0 0 1 2.78 6.6c0 5.14-4.19 9.3-9.36 9.3H0V0h11.1a9.33 9.33 0 0 1 9.37 9.29c0 1.79-.51 3.47-1.4 4.88Zm49.67 1.84h-3.56v5.55c0 1.68.55 2.92 1.97 2.92a6 6 0 0 0 1.6-.2v5.2s-1.48.89-3.48.89h-.09l-.26-.01h-.06l-.13-.01c-3.99-.2-6.7-2.7-6.7-7V5.03l7.14-1.5v5.4h3.57v7.08Z"
-              clip-rule="evenodd" />
+              clip-rule="evenodd"
+            />
           </svg>
         </a>
       </div>
 
       <!-- Sidebar Content with Main and Library Sections -->
-      <div v-if="isOpen" class="flex flex-col h-full justify-between"
-      :class="isOpen ? 'translate-x-0 w-64' : 'w-0 -translate-x-full md:w-64'">
+      <div
+        v-if="isOpen"
+        class="flex flex-col h-full justify-between"
+        :class="isOpen ? 'translate-x-0 w-64' : 'w-0 -translate-x-full md:w-64'"
+      >
         <!-- Main Section -->
-        <div >
+        <div>
           <h3 class="mx-6 mb-2 text-xs text-gray-400 uppercase tracking-widest">
             เมนูหลัก
           </h3>
 
-          <div class="group flex items-center px-6 py-2.5 transition cursor-pointer">
-            <Icon name="lucide:gauge" class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]" />
-            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]">หน้าหลัก</span>
+          <div
+            class="group flex items-center px-6 py-2.5 transition cursor-pointer"
+          >
+            <Icon
+              name="lucide:gauge"
+              class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]"
+            />
+            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]"
+              >หน้าหลัก</span
+            >
           </div>
-          <div class="group flex items-center px-6 py-2.5 transition cursor-pointer">
-            <Icon name="lucide:inbox" class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]" />
-            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]">Category</span>
+          <div
+            class="group flex items-center px-6 py-2.5 transition cursor-pointer"
+          >
+            <Icon
+              name="lucide:inbox"
+              class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]"
+            />
+            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]"
+              >Category</span
+            >
           </div>
-
         </div>
 
         <!-- Library Section (Moved to Bottom) -->
@@ -43,38 +66,32 @@
           <h3 class="mx-6 mb-2 text-xs text-gray-400 uppercase tracking-widest">
             Library
           </h3>
-          <div class="group flex items-center px-6 py-2.5 transition cursor-pointer">
-            <Icon name="lucide:message-square" class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]" />
-            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]">Feedback</span>
+          <div
+            class="group flex items-center px-6 py-2.5 transition cursor-pointer"
+          >
+            <Icon
+              name="lucide:message-square"
+              class="h-5 w-5 text-gray-400 mr-2 group-hover:text-[#c164ff]"
+            />
+            <span class="mt-1 text-gray-500 group-hover:text-[#c164ff]"
+              >Feedback</span
+            >
           </div>
-
-       
         </div>
       </div>
     </div>
 
-<<<<<<< HEAD
     <div
-      class="flex-1 transition-[2] duration-300 ease-in-out h-screen dark:bg-[#0f172a]"
+      class="flex-1 transition-[2] duration-300 ease-in-out h-screen bg-[#fff] dark:bg-[#0f172a]"
     >
-      <div
-        class="px-6 bg-[#FAFAFA] border-b dark:bg-[#0f172a] dark:border-b-[#364559]"
-      >
-=======
-    <div class="flex-1 transition-[2] duration-300 ease-in-out h-screen bg-[#fff] dark:bg-[#0f172a]">
       <div class="px-6 border-b dark:bg-[#0f172a] dark:border-b-[#364559]">
->>>>>>> 7885a0ce9d0c6051f91a96a14a5885920c9e1a78
         <TairoSidebarToolbar></TairoSidebarToolbar>
       </div>
 
       <div class="p-5 dark:text-white">
         <h1
-<<<<<<< HEAD
           class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white"
         >
-=======
-          class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white">
->>>>>>> 7885a0ce9d0c6051f91a96a14a5885920c9e1a78
           {{ route.meta.description }}
         </h1>
         <slot />
@@ -87,25 +104,25 @@
 const route = useRoute();
 const { isOpen } = useSidebar();
 
-const screenWidth = ref(0) // Start with 0 or a default value
+const screenWidth = ref(0); // Start with 0 or a default value
 
 const updateWidth = () => {
-  screenWidth.value = window.innerWidth
-}
+  screenWidth.value = window.innerWidth;
+};
 
 onMounted(() => {
-  updateWidth() // Set initial width
-  window.addEventListener('resize', updateWidth)
-})
+  updateWidth(); // Set initial width
+  window.addEventListener("resize", updateWidth);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('resize', updateWidth)
-})
+  window.removeEventListener("resize", updateWidth);
+});
 
 watch(screenWidth, (newWidth) => {
   if (newWidth < 768) {
     isOpen.value = false;
-  } 
+  }
   if (newWidth > 1024) {
     isOpen.value = true;
   }

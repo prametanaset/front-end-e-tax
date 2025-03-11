@@ -5,81 +5,81 @@ import {
   ListboxLabel,
   ListboxOption,
   ListboxOptions,
-} from '@headlessui/vue'
+} from "@headlessui/vue";
 
 import {
   Float,
   FloatReference,
   FloatContent,
   type FloatProps,
-} from '@headlessui-float/vue'
+} from "@headlessui-float/vue";
 
 const props = withDefaults(
   defineProps<{
     /**
      * The items to display in the multiselect.
      */
-    items: T[]
+    items: T[];
 
     /**
      * The label to display for the multiselect.
      */
-    label?: string
+    label?: string;
 
     /**
      * If the label should be floating.
      */
-    labelFloat?: boolean
+    labelFloat?: boolean;
 
     /**
      * The icon to display for the multiselect.
      */
-    icon?: string
+    icon?: string;
 
     /**
      * The icon to show when the component is selected.
      */
-    selectedIcon?: string
+    selectedIcon?: string;
 
     /**
      * The placeholder text to display when no selection has been made.
      */
-    placeholder?: string
+    placeholder?: string;
 
     /**
      * An error message or boolean value indicating whether the input is in an error state.
      */
-    error?: string | boolean
+    error?: string | boolean;
 
     /**
      * Whether the multiselect is in a loading state.
      */
-    loading?: boolean
+    loading?: boolean;
 
     /**
      * Whether the multiselect is disabled.
      */
-    disabled?: boolean
+    disabled?: boolean;
 
     /**
      * Wether the border should change color when focused
      */
-    colorFocus?: boolean
+    colorFocus?: boolean;
 
     /**
      * Whether the multiselect allows multiple selections.
      */
-    multiple?: boolean
+    multiple?: boolean;
 
     /**
      * The label to display for multiple selections, or a function that returns the label.
      */
-    multipleLabel?: string | ((value: T[], labelProperty?: string) => string)
+    multipleLabel?: string | ((value: T[], labelProperty?: string) => string);
 
     /**
      * Used a fixed strategy to float the component
      */
-    fixed?: boolean
+    fixed?: boolean;
 
     /**
      * The properties to use for the value, label, sublabel, media, and icon of the options items.
@@ -88,35 +88,35 @@ const props = withDefaults(
       /**
        * The property to use for the value of the options.
        */
-      value?: T extends object ? keyof T : string
+      value?: T extends object ? keyof T : string;
 
       /**
        * The property to use for the label of the options.
        */
-      label?: T extends object ? keyof T : string
+      label?: T extends object ? keyof T : string;
 
       /**
        * The property to use for the sublabel of the options.
        */
-      sublabel?: T extends object ? keyof T : string
+      sublabel?: T extends object ? keyof T : string;
 
       /**
        * The property to use for the media of the options.
        */
-      media?: T extends object ? keyof T : string
+      media?: T extends object ? keyof T : string;
 
       /**
        * The property to use for the icon of the options.
        */
-      icon?: T extends object ? keyof T : string
-    }
+      icon?: T extends object ? keyof T : string;
+    };
 
     /**
      * The contrast of the listbox.
      *
      * @default 'default'
      */
-    contrast?: 'default' | 'default-contrast' | 'muted' | 'muted-contrast'
+    contrast?: "default" | "default-contrast" | "muted" | "muted-contrast";
 
     /**
      * The placement of the component via floating-ui.
@@ -124,18 +124,18 @@ const props = withDefaults(
      * @default 'bottom-start'
      */
     placement?:
-      | 'top'
-      | 'top-start'
-      | 'top-end'
-      | 'right'
-      | 'right-start'
-      | 'right-end'
-      | 'bottom'
-      | 'bottom-start'
-      | 'bottom-end'
-      | 'left'
-      | 'left-start'
-      | 'left-end'
+      | "top"
+      | "top-start"
+      | "top-end"
+      | "right"
+      | "right-start"
+      | "right-end"
+      | "bottom"
+      | "bottom-start"
+      | "bottom-end"
+      | "left"
+      | "left-start"
+      | "left-end";
 
     /**
      * The radius of the multiselect.
@@ -143,19 +143,19 @@ const props = withDefaults(
      * @since 2.0.0
      * @default 'sm'
      */
-    rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+    rounded?: "none" | "sm" | "md" | "lg" | "full";
 
     /**
      * The size of the listbox.
      *
      * @default 'md'
      */
-    size?: 'sm' | 'md' | 'lg' | 'xl'
+    size?: "sm" | "md" | "lg" | "xl";
 
     /**
      * Optional options for the underlying float component.
      */
-    floatOptions?: FloatProps
+    floatOptions?: FloatProps;
 
     /**
      * Optional CSS classes to apply to the wrapper, label, input, addon, error, and icon elements.
@@ -164,166 +164,166 @@ const props = withDefaults(
       /**
        * CSS classes to apply to the wrapper element.
        */
-      wrapper?: string | string[]
+      wrapper?: string | string[];
 
       /**
        * CSS classes to apply to the outer element.
        */
-      outer?: string | string[]
+      outer?: string | string[];
 
       /**
        * CSS classes to apply to the label element.
        */
-      label?: string | string[]
+      label?: string | string[];
 
       /**
        * CSS classes to apply to the button element.
        */
-      button?: string | string[]
+      button?: string | string[];
 
       /**
        * CSS classes to apply to the icon element.
        */
-      icon?: string | string[]
+      icon?: string | string[];
 
       /**
        * CSS classes to apply to the error element.
        */
-      error?: string | string[]
-    }
+      error?: string | string[];
+    };
   }>(),
   {
     rounded: undefined,
     size: undefined,
     contrast: undefined,
-    label: '',
-    icon: '',
-    selectedIcon: 'lucide:check',
-    placeholder: '',
+    label: "",
+    icon: "",
+    selectedIcon: "lucide:check",
+    placeholder: "",
     error: false,
     multipleLabel: undefined,
     properties: () => ({}),
     placement: undefined,
     classes: () => ({}),
     floatOptions: () => ({}),
-  },
-)
+  }
+);
 
-const [modelValue, modelModifiers] = defineModel<T | T[], 'prop'>({
+const [modelValue, modelModifiers] = defineModel<T | T[], "prop">({
   set(value) {
     if (!props.multiple && modelModifiers.prop && props.properties?.value) {
-      const attr = props.properties.value
+      const attr = props.properties.value;
       return (
         props.items.find(
           (item) =>
             item &&
-            typeof item === 'object' &&
+            typeof item === "object" &&
             attr in item &&
-            (item as any)[attr] === value,
+            (item as any)[attr] === value
         ) as any
-      )?.[attr]
+      )?.[attr];
     }
-    return value
+    return value;
   },
   get(value) {
     if (!props.multiple && modelModifiers.prop && props.properties?.value) {
-      const attr = props.properties.value
+      const attr = props.properties.value;
       return props.items.find(
         (item) =>
           item &&
-          typeof item === 'object' &&
+          typeof item === "object" &&
           attr in item &&
-          (item as any)[attr] === value,
-      )
+          (item as any)[attr] === value
+      );
     }
-    return value
+    return value;
   },
-})
+});
 
 defineSlots<{
-  label(): any
-  icon(): any
-  'listbox-button'(props: { value: T | T[] | undefined; open: boolean }): any
-  'listbox-item'(props: {
-    item: T | T[] | undefined
-    open: boolean
-    active: boolean
-    selected: boolean
-  }): any
-}>()
+  label(): any;
+  icon(): any;
+  "listbox-button"(props: { value: T | T[] | undefined; open: boolean }): any;
+  "listbox-item"(props: {
+    item: T | T[] | undefined;
+    open: boolean;
+    active: boolean;
+    selected: boolean;
+  }): any;
+}>();
 
-const contrast = useNuiDefaultProperty(props, 'BaseListbox', 'contrast')
-const placement = useNuiDefaultProperty(props, 'BaseListbox', 'placement')
-const rounded = useNuiDefaultProperty(props, 'BaseListbox', 'rounded')
-const size = useNuiDefaultProperty(props, 'BaseListbox', 'size')
+const contrast = useNuiDefaultProperty(props, "BaseListbox", "contrast");
+const placement = useNuiDefaultProperty(props, "BaseListbox", "placement");
+const rounded = useNuiDefaultProperty(props, "BaseListbox", "rounded");
+const size = useNuiDefaultProperty(props, "BaseListbox", "size");
 
 const radiuses = {
-  none: '',
-  sm: 'nui-listbox-rounded-sm',
-  md: 'nui-listbox-rounded-md',
-  lg: 'nui-listbox-rounded-lg',
-  full: 'nui-listbox-rounded-full',
-}
+  none: "",
+  sm: "nui-listbox-rounded-sm",
+  md: "nui-listbox-rounded-md",
+  lg: "nui-listbox-rounded-lg",
+  full: "nui-listbox-rounded-full",
+};
 
 const sizes = {
-  sm: 'nui-listbox-sm',
-  md: 'nui-listbox-md',
-  lg: 'nui-listbox-lg',
-  xl: 'nui-listbox-xl',
-}
+  sm: "nui-listbox-sm",
+  md: "nui-listbox-md",
+  lg: "nui-listbox-lg",
+  xl: "nui-listbox-xl",
+};
 
 const contrasts = {
-  default: 'nui-listbox-default',
-  'default-contrast': 'nui-listbox-default-contrast',
-  muted: 'nui-listbox-muted',
-  'muted-contrast': 'nui-listbox-muted-contrast',
-}
+  default: "nui-listbox-default",
+  "default-contrast": "nui-listbox-default-contrast",
+  muted: "nui-listbox-muted",
+  "muted-contrast": "nui-listbox-muted-contrast",
+};
 
 const placeholder = computed(() => {
   if (props.loading) {
-    return
+    return;
   }
   if (props.labelFloat) {
-    return props.label
+    return props.label;
   }
 
-  return props.placeholder
-})
+  return props.placeholder;
+});
 
 function multipleLabelResolved(value: T[], labelProperty?: string): string {
-  if (typeof props.multipleLabel === 'function') {
-    return props.multipleLabel(value, props.properties.label)
+  if (typeof props.multipleLabel === "function") {
+    return props.multipleLabel(value, props.properties.label);
   }
   if (props.multipleLabel) {
-    return props.multipleLabel
+    return props.multipleLabel;
   }
   if (value.length === 0 && props.placeholder) {
-    return ''
+    return "";
   } else if (value.length === 0) {
-    return 'No elements selected'
+    return "No elements selected";
   } else if (value.length > 1) {
-    return `${value.length} elements selected`
+    return `${value.length} elements selected`;
   }
 
   if (modelModifiers.prop && props.properties.label) {
     const item = props.items.find(
       (item) =>
         item &&
-        typeof item === 'object' &&
+        typeof item === "object" &&
         props.properties.value &&
-        (item as any)[props.properties.value] === value[0],
-    )
-    return labelProperty && typeof item === 'object'
+        (item as any)[props.properties.value] === value[0]
+    );
+    return labelProperty && typeof item === "object"
       ? String((item as any)?.[labelProperty])
-      : String(item)
+      : String(item);
   }
 
-  return labelProperty && typeof value?.[0] === 'object'
+  return labelProperty && typeof value?.[0] === "object"
     ? String((value?.[0] as any)?.[labelProperty])
-    : String(value?.[0])
+    : String(value?.[0]);
 }
 
-const internal = ref<any>(modelValue)
+const internal = ref<any>(modelValue);
 </script>
 
 <template>
@@ -414,7 +414,7 @@ const internal = ref<any>(modelValue)
                         {{
                           multipleLabelResolved(
                             modelValue as T[],
-                            props.properties.label,
+                            props.properties.label
                           )
                         }}
                       </div>
@@ -454,8 +454,8 @@ const internal = ref<any>(modelValue)
                           props.properties.label
                             ? (modelValue as any)[props.properties.label]
                             : props.properties.value
-                              ? (modelValue as any)[props.properties.value]
-                              : modelValue
+                            ? (modelValue as any)[props.properties.value]
+                            : modelValue
                         }}
                       </div>
                     </template>
@@ -594,6 +594,6 @@ const internal = ref<any>(modelValue)
   margin-top: unset;
 }
 .nui-listbox.nui-listbox-default .nui-listbox-button:focus {
-   box-shadow: none !important;
+  box-shadow: none !important;
 }
 </style>
