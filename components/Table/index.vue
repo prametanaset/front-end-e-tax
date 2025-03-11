@@ -10,7 +10,23 @@
           rounded="md"
           label="ค้นหา"
           placeholder="ค้นหาด้วยหมายเลขใบแจ้งหนี้"
-        />
+        >
+          <!-- reset data -->
+          <template #action v-if="criteria.keyword != ''">
+            <button
+              type="button"
+              data-nui-tooltip="ล้าง"
+              @click="criteria.keyword = ''"
+              class="text-muted-400 hover:text-primary-500 absolute end-0 top-0 z-[1] flex size-8 items-center justify-center transition-colors duration-300"
+            >
+              <Icon
+                name="line-md:menu-to-close-alt-transition"
+                class="size-4 mt-2"
+              />
+            </button>
+          </template>
+          <!-- end reset data -->
+        </BaseInput>
       </div>
       <div class="flex-auto">
         <Test
@@ -26,21 +42,6 @@
           size="md"
         />
       </div>
-      <!-- <div>
-        <BaseSelect
-          v-model="perPage"
-          rounded="md"
-          label=""
-          :classes="{
-            wrapper: 'w-full sm:w-40',
-          }"
-        >
-          <option :value="10">10 per page</option>
-          <option :value="25">25 per page</option>
-          <option :value="50">50 per page</option>
-          <option :value="100">100 per page</option>
-        </BaseSelect>
-      </div> -->
       <div class="flex-auto w-20">
         <BaseInput
           v-model="displayDateFrom"
@@ -210,6 +211,7 @@
         </BaseButton>
       </div>
     </div>
+    <!-- END Search Data -->
     <div v-if="!pending && data?.data.length === 0">
       <BasePlaceholderPage
         title="ไม่พบผลลัพธ์ที่ตรงกับคำค้นหาของคุณ"

@@ -30,10 +30,9 @@
 
       <BaseCard
         shadow="flat"
-        class="p-3 rounded sm:col-span-1 md:col-span-3 xl:col-span-1 !bg-primary-100 !dark:bg-primary-100 !border-primary-500 w-full"
+        class="p-3 rounded sm:col-span-1 md:col-span-3 xl:col-span-1 !border-primary-500 w-full"
       >
         <Widget
-          class=""
           :title="'Widget name'"
           :count-number="5"
           :percen-last-month="7.5"
