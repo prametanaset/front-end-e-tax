@@ -192,7 +192,7 @@ const props = defineProps<{
         </MenuItems>
       </Transition>
     </Menu>
-    <div class="ml-3">
+    <div v-if="false" class="ml-3">
       <h4 class="font-sans text-sm font-medium dark:text-white">
         Maya Rosselini
       </h4>
