@@ -16,14 +16,14 @@
               lead="normal"
               class="uppercase tracking-wider"
             >
-              ตั้งค่า
+              ตั้งค่าบัญชี
             </BaseHeading>
             <!-- <BaseText size="xs" class="text-muted-400">
             Edit your account prefs and settings
           </BaseText> -->
           </div>
           <div class="flex items-center gap-2">
-            <BaseButton class="w-24" to="/layouts/profile" color="muted">
+            <BaseButton class="w-24" to="/profile" color="muted">
               ยกเลิก
             </BaseButton>
             <BaseButton
@@ -39,13 +39,18 @@
         </div>
         <div class="p-4">
           <div class="mx-auto max-w-lg space-y-12 py-8">
-            <BaseMessage v-if="success" @close="success = false">
+            <BaseMessage
+              v-if="success"
+              @close="success = false"
+              color="success"
+            >
               บันทึกการตั้งค่าของคุณแล้ว
             </BaseMessage>
             <BaseMessage
               v-if="fieldsWithErrors"
               type="danger"
               @close="() => setErrors({})"
+              color="danger"
             >
               กรุณากรอกข้อมูลให้ครบถ้วนก่อนทำการบันทึก
             </BaseMessage>
@@ -54,7 +59,7 @@
               label="Change Password"
               sublabel="For an improved account security"
             >
-              <div class="grid grid-cols-12 gap-4 mb-5">
+              <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                   <Field
                     v-slot="{ field, errorMessage, handleChange, handleBlur }"

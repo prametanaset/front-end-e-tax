@@ -52,6 +52,10 @@ definePageMeta({
   description: "รายการใบแจ้งหนี้",
   layout: "custom",
 });
+
+useHead({
+  title: "e-tax | Dashboard",
+});
 </script>
 
 <style></style>

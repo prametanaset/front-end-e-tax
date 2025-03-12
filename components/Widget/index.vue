@@ -17,7 +17,7 @@
         size="3xl"
         weight="bold"
         lead="tight"
-        class="text-muted-800 dark:text-white sm:my-5 md:my-4 lg:my-5"
+        class="text-muted-800 dark:text-white xs:my-5 sm:my-5 md:my-4 lg:my-5"
       >
         <p>{{ props.countNumber }}</p>
       </BaseHeading>

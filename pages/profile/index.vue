@@ -73,7 +73,7 @@
                   v-model="inputFile"
                   accept="image/*"
                 >
-                  <div class="relative size-24 mb-5">
+                  <div class="relative size-24">
                     <!-- <img
                     v-if="files?.length && files.item(0)"
                     :src="preview(files.item(0)!).value"
@@ -189,7 +189,7 @@
                     />
                   </Field>
                 </div>
-                <div class="col-span-12 mb-5">
+                <div class="col-span-12">
                   <Field
                     v-slot="{ field, errorMessage, handleChange, handleBlur }"
                     name="profile.bio"
@@ -248,7 +248,7 @@
                     />
                   </Field>
                 </div>
-                <div class="col-span-12 sm:col-span-6 mb-5">
+                <div class="col-span-12 sm:col-span-6">
                   <Field
                     v-slot="{ field, errorMessage, handleChange, handleBlur }"
                     name="info.flexible"
@@ -266,7 +266,7 @@
                     />
                   </Field>
                 </div>
-                <div class="col-span-12 sm:col-span-6 mb-5">
+                <div class="col-span-12 sm:col-span-6">
                   <Field
                     v-slot="{ field, errorMessage, handleChange, handleBlur }"
                     name="info.remote"

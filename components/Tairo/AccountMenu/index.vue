@@ -156,7 +156,7 @@ const props = defineProps<{
                   <h6
                     class="font-heading text-muted-800 text-xs font-medium leading-none dark:text-white"
                   >
-                    Theme
+                    Dark mode
                   </h6>
                   <p class="text-muted-400 font-sans text-xs mt-3">
                     <BaseThemeSwitch />
@@ -192,7 +192,7 @@ const props = defineProps<{
         </MenuItems>
       </Transition>
     </Menu>
-    <div class="ml-3">
+    <div v-if="false" class="ml-3">
       <h4 class="font-sans text-sm font-medium dark:text-white">
         Maya Rosselini
       </h4>
