@@ -54,7 +54,7 @@
               label="Change Password"
               sublabel="For an improved account security"
             >
-              <div class="grid grid-cols-12 gap-4 mb-5">
+              <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12">
                   <Field
                     v-slot="{ field, errorMessage, handleChange, handleBlur }"
