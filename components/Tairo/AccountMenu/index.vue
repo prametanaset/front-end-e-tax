@@ -73,7 +73,7 @@ const props = defineProps<{
           <div class="p-2">
             <MenuItem v-slot="{ active }" as="div">
               <NuxtLink
-                to="/layouts/profile"
+                to="/profile"
                 class="group flex w-full items-center rounded-md p-3 text-sm transition-colors duration-300"
                 :class="[
                   active
@@ -193,7 +193,9 @@ const props = defineProps<{
       </Transition>
     </Menu>
     <div class="ml-3">
-      <h4 class="font-sans text-sm font-medium dark:text-white">Maya Rosselini</h4>
+      <h4 class="font-sans text-sm font-medium dark:text-white">
+        Maya Rosselini
+      </h4>
 
       <p class="text-muted-400 font-sans text-xs font-normal">
         Product Manager
