@@ -1,0 +1,9 @@
+
+services:
+  nuxt:
+    build:
+      context: .
+    image: front-end-e-tax
+    container_name: front-end-e-tax
+    ports:
+      - 2501:3000
