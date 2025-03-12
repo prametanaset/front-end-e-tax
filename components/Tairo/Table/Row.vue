@@ -13,7 +13,7 @@ const props = withDefaults(
   <tr
     :class="[
       props.hoverable
-        ? 'hover:bg-muted-50 dark:hover:bg-muted-900 transition-colors duration-300'
+        ? 'hover:bg-muted-50 dark:hover:bg-muted-900 transition-colors duration-300 overflow-hidden'
         : '',
     ]"
   >

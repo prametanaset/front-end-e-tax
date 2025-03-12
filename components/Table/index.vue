@@ -236,7 +236,13 @@
       <template #header>
         <TairoTableHeading uppercase class="p-4">
           <div class="flex items-center">
-            <BaseCheckbox v-model="selectAll" rounded="md" color="primary" />
+            <BaseCheckbox
+              :model-value="isAllVisibleSelected"
+              :indeterminate="selected.length > 0 && !isAllVisibleSelected"
+              rounded="md"
+              color="primary"
+              @click="toggleAllVisibleSelection"
+            />
           </div>
         </TairoTableHeading>
 
@@ -255,12 +261,12 @@
         </TairoTableHeading>
       </template>
 
-      <TairoTableRow v-for="member in team" :key="member.id">
+      <TairoTableRow v-for="item in data?.data" :key="item.id">
         <TairoTableCell class="p-4">
           <div class="flex items-center">
             <BaseCheckbox
               v-model="selected"
-              :value="`table-4-${member.id}`"
+              :value="`table-4-${item.id}`"
               rounded="md"
               color="primary"
             />
@@ -268,58 +274,69 @@
         </TairoTableCell>
 
         <TairoTableCell light>
-          {{ member.id }}
+          {{ item.id }}
         </TairoTableCell>
 
         <TairoTableCell>
           <div class="flex items-center">
-            <BaseAvatar :src="member.src" size="sm" />
+            <BaseAvatar :src="item.picture" :text="item.initials" size="sm" />
 
             <div class="ms-3 leading-none">
               <h4 class="font-sans text-sm font-medium">
-                {{ member.name }}
+                {{ item.username }}
               </h4>
 
               <p class="text-muted-400 font-sans text-xs font-normal">
-                {{ member.role }}
+                {{ item.position }}
               </p>
             </div>
           </div>
         </TairoTableCell>
 
-        <TairoTableCell>{{ member.createdDate }}</TairoTableCell>
+        <!-- <TairoTableCell>{{ item.createdDate }}</TairoTableCell> -->
 
-        <TairoTableCell>{{ member.rate }}</TairoTableCell>
+        <TairoTableCell>{{
+          new Intl.DateTimeFormat("th-TH", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+          }).format(new Date())
+        }}</TairoTableCell>
+
+        <TairoTableCell>{{ item.completed }}</TairoTableCell>
 
         <TairoTableCell>
           <BaseTag
-            v-if="member.status === 'Available'"
+            v-if="item.status === 'Available'"
             color="success"
             variant="pastel"
             rounded="full"
             class="font-medium"
           >
-            {{ member.status }}
+            {{ item.status }}
           </BaseTag>
 
           <BaseTag
-            v-else-if="member.status === 'New'"
+            v-else-if="item.status === 'New'"
             color="info"
             variant="pastel"
             rounded="full"
             class="font-medium"
           >
-            {{ member.status }}
+            {{ item.status }}
           </BaseTag>
 
           <BaseTag
-            v-else-if="member.status === 'Hired'"
+            v-else-if="item.status === 'Hired'"
             color="warning"
             variant="pastel"
             rounded="full"
             class="font-medium"
           >
-            {{ member.status }}
+            {{ item.status }}
           </BaseTag>
         </TairoTableCell>
 
@@ -343,8 +360,25 @@
       </TairoTableRow>
     </TairoTable>
 
-    <div class="mt-3">
-      <BasePagination
+    <div class="mt-3 flex items-center justify-end gap-x-8">
+      <div class="mb-[2px]">
+        <BaseSelect
+          v-model="perPage"
+          rounded="md"
+          size="md"
+          label=""
+          :classes="{
+            wrapper: 'w-full w-40',
+          }"
+        >
+          <option :value="5">5 per page</option>
+          <option :value="10">10 per page</option>
+          <option :value="25">25 per page</option>
+          <option :value="50">50 per page</option>
+          <option :value="100">100 per page</option>
+        </BaseSelect>
+      </div>
+      <CustomBasePagination
         :total-items="data?.total ?? 0"
         :item-per-page="perPage"
         :current-page="page"
@@ -445,6 +479,112 @@ const team = [
     status: "New",
     createdDate: "2 มี.ค 2568 10:34",
   },
+  {
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },{
+    id: 3,
+    src: "/img/avatars/14.svg",
+    name: "Andrew Higgs",
+    role: "Project manager",
+    rate: 69.0,
+    status: "New",
+    createdDate: "2 มี.ค 2568 10:34",
+  },
+
 ];
 
 watch([criteria.keyword, perPage], () => {
@@ -483,6 +623,18 @@ const { data, pending, error, refresh } = await useFetch(
     query,
   }
 );
+
+const isAllVisibleSelected = computed(() => {
+  return selected.value.length === data.value?.data.length;
+});
+
+function toggleAllVisibleSelection() {
+  if (isAllVisibleSelected.value) {
+    selected.value = [];
+  } else {
+    selected.value = data.value?.data.map((item) => item.id) ?? [];
+  }
+}
 </script>
 
 <style scoped>

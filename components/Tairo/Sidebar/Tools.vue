@@ -9,6 +9,7 @@ const app = useAppConfig()
 
       <span class="text-xs">e-tax พร้อมใช้งาน</span>
     </BaseTag>
+    <BaseThemeToggle></BaseThemeToggle>
     <TairoAccountMenu :horizontal="true" />
   </div>
 </template>
