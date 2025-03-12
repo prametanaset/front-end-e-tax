@@ -1,35 +1,18 @@
 <script setup lang="ts">
 const app = useAppConfig();
-const isActive = ref(true);
-const theme = ref("success");
-
-const toggleMode = () => {
-  isActive.value = !isActive.value;
-  if (isActive.value) {
-    theme.value = "success";
-  } else {
-    theme.value = "warning";
-  }
-};
 </script>
 
 <template>
   <div class="flex items-center gap-5">
     <BaseTag
-      @click="toggleMode"
       variant="pastel"
       size="md"
-      :color="theme"
-      class="flex items-center gap-1"
+      color="success"
+      class="pointer-events-none flex items-center gap-1"
     >
-      <Icon
-        :name="isActive ? 'lucide:mail-check' : 'lucide:mail-warning'"
-        class="-ms-1 size-4"
-      />
+      <Icon name="lucide:mail" class="-ms-1 size-4" />
 
-      <span class="text-xs cursor-pointer">{{
-        isActive ? "e-tax พร้อมใช้งาน" : "กรุณาเปิดใช้งาน e-tax"
-      }}</span>
+      <span class="text-xs">e-tax พร้อมใช้งาน</span>
     </BaseTag>
     <!-- <BaseThemeToggle></BaseThemeToggle> -->
     <TairoAccountMenu :horizontal="true" />
