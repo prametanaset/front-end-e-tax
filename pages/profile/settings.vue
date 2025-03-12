@@ -1,230 +1,238 @@
 <template>
-  <form method="POST" action="" class="w-full pb-16" @submit.prevent="onSubmit">
-    <BaseCard shadow="flat">
-      <div class="flex items-center justify-between p-4">
-        <div>
-          <BaseHeading
-            tag="h2"
-            size="sm"
-            weight="medium"
-            lead="normal"
-            class="uppercase tracking-wider"
-          >
-            Settings
-          </BaseHeading>
-          <BaseText size="xs" class="text-muted-400">
+  <Profile>
+    <form
+      method="POST"
+      action=""
+      class="w-full pb-16"
+      @submit.prevent="onSubmit"
+    >
+      <BaseCard shadow="flat">
+        <div class="flex items-center justify-between p-4">
+          <div>
+            <BaseHeading
+              tag="h2"
+              size="sm"
+              weight="medium"
+              lead="normal"
+              class="uppercase tracking-wider"
+            >
+              ตั้งค่า
+            </BaseHeading>
+            <!-- <BaseText size="xs" class="text-muted-400">
             Edit your account prefs and settings
-          </BaseText>
+          </BaseText> -->
+          </div>
+          <div class="flex items-center gap-2">
+            <BaseButton class="w-24" to="/layouts/profile" color="muted">
+              ยกเลิก
+            </BaseButton>
+            <BaseButton
+              type="submit"
+              color="primary"
+              class="w-24"
+              :disabled="isSubmitting"
+              :loading="isSubmitting"
+            >
+              บันทึก
+            </BaseButton>
+          </div>
         </div>
-        <div class="flex items-center gap-2">
-          <BaseButton class="w-24" to="/layouts/profile"> Cancel </BaseButton>
-          <BaseButton
-            type="submit"
-            color="primary"
-            class="w-24"
-            :disabled="isSubmitting"
-            :loading="isSubmitting"
-          >
-            Save
-          </BaseButton>
-        </div>
-      </div>
-      <div class="p-4">
-        <div class="mx-auto max-w-lg space-y-12 py-8">
-          <BaseMessage v-if="success" @close="success = false">
-            Your settings has been saved!
-          </BaseMessage>
-          <BaseMessage
-            v-if="fieldsWithErrors"
-            type="danger"
-            @close="() => setErrors({})"
-          >
-            This form has {{ fieldsWithErrors }} errors, please check them
-            before submitting
-          </BaseMessage>
+        <div class="p-4">
+          <div class="mx-auto max-w-lg space-y-12 py-8">
+            <BaseMessage v-if="success" @close="success = false">
+              บันทึกการตั้งค่าของคุณแล้ว
+            </BaseMessage>
+            <BaseMessage
+              v-if="fieldsWithErrors"
+              type="danger"
+              @close="() => setErrors({})"
+            >
+              กรุณากรอกข้อมูลให้ครบถ้วนก่อนทำการบันทึก
+            </BaseMessage>
 
-          <TairoFormGroup
-            label="Change Password"
-            sublabel="For an improved account security"
-          >
-            <div class="grid grid-cols-12 gap-4 mb-5">
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="currentPassword"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="password"
-                    icon="ph:lock-duotone"
-                    placeholder="Old password"
-                    autocomplete="current-password"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            <TairoFormGroup
+              label="Change Password"
+              sublabel="For an improved account security"
+            >
+              <div class="grid grid-cols-12 gap-4 mb-5">
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="currentPassword"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="password"
+                      icon="ph:lock-duotone"
+                      placeholder="Old password"
+                      autocomplete="current-password"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="newPassword"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="password"
+                      icon="ph:lock-duotone"
+                      placeholder="New password"
+                      autocomplete="new-password"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="confirmPassword"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="password"
+                      icon="ph:lock-duotone"
+                      placeholder="Repeat new password"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="newPassword"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="password"
-                    icon="ph:lock-duotone"
-                    placeholder="New password"
-                    autocomplete="new-password"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            </TairoFormGroup>
+            <TairoFormGroup
+              label="2 Factor Auth"
+              sublabel="Two factor authentication"
+            >
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, handleChange, handleBlur }"
+                    name="twoFactor.enabled"
+                  >
+                    <BaseSwitchThin
+                      :model-value="field.value"
+                      :disabled="isSubmitting"
+                      label="Enabled"
+                      sublabel="Toggle 2 factor authentication"
+                      color="primary"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div v-show="values.twoFactor?.enabled" class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="twoFactor.phoneNumber"
+                  >
+                    <BaseInput
+                      ref="phoneInput"
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="tel"
+                      icon="ph:phone-duotone"
+                      placeholder="Phone number"
+                      autocomplete="tel"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="confirmPassword"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="password"
-                    icon="ph:lock-duotone"
-                    placeholder="Repeat new password"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            </TairoFormGroup>
+            <TairoFormGroup
+              label="Notifications"
+              sublabel="Configure how you receive notifications"
+            >
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 mt-3">
+                  <Field
+                    v-slot="{ field, handleChange, handleBlur }"
+                    name="notifications.enabled"
+                  >
+                    <BaseSwitchBall
+                      :model-value="field.value"
+                      :disabled="isSubmitting"
+                      label="Enabled"
+                      sublabel="Receive emails notifications from the app"
+                      color="primary"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div v-show="values.notifications?.enabled" class="col-span-12">
+                  <Field
+                    v-slot="{ field, handleChange, handleBlur }"
+                    name="notifications.flushLowPriority"
+                  >
+                    <BaseSwitchBall
+                      :model-value="field.value"
+                      :disabled="isSubmitting"
+                      label="Flush"
+                      sublabel="Discard low priority notifications"
+                      color="primary"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div v-show="values.notifications?.enabled" class="col-span-12">
+                  <Field
+                    v-slot="{ field, handleChange, handleBlur }"
+                    name="notifications.marketing"
+                  >
+                    <BaseSwitchBall
+                      :model-value="field.value"
+                      :disabled="isSubmitting"
+                      label="Marketing"
+                      sublabel="Enable marketing emails"
+                      color="primary"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div v-show="values.notifications?.enabled" class="col-span-12">
+                  <Field
+                    v-slot="{ field, handleChange, handleBlur }"
+                    name="notifications.partners"
+                  >
+                    <BaseSwitchBall
+                      :model-value="field.value"
+                      :disabled="isSubmitting"
+                      label="Partners"
+                      sublabel="Enable partner emails"
+                      color="primary"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-            </div>
-          </TairoFormGroup>
-          <TairoFormGroup
-            label="2 Factor Auth"
-            sublabel="Two factor authentication"
-          >
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, handleChange, handleBlur }"
-                  name="twoFactor.enabled"
-                >
-                  <BaseSwitchThin
-                    :model-value="field.value"
-                    :disabled="isSubmitting"
-                    label="Enabled"
-                    sublabel="Toggle 2 factor authentication"
-                    color="primary"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div v-show="values.twoFactor?.enabled" class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="twoFactor.phoneNumber"
-                >
-                  <BaseInput
-                    ref="phoneInput"
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="tel"
-                    icon="ph:phone-duotone"
-                    placeholder="Phone number"
-                    autocomplete="tel"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-            </div>
-          </TairoFormGroup>
-          <TairoFormGroup
-            label="Notifications"
-            sublabel="Configure how you receive notifications"
-          >
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-12 mt-3">
-                <Field
-                  v-slot="{ field, handleChange, handleBlur }"
-                  name="notifications.enabled"
-                >
-                  <BaseSwitchBall
-                    :model-value="field.value"
-                    :disabled="isSubmitting"
-                    label="Enabled"
-                    sublabel="Receive emails notifications from the app"
-                    color="primary"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div v-show="values.notifications?.enabled" class="col-span-12">
-                <Field
-                  v-slot="{ field, handleChange, handleBlur }"
-                  name="notifications.flushLowPriority"
-                >
-                  <BaseSwitchBall
-                    :model-value="field.value"
-                    :disabled="isSubmitting"
-                    label="Flush"
-                    sublabel="Discard low priority notifications"
-                    color="primary"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div v-show="values.notifications?.enabled" class="col-span-12">
-                <Field
-                  v-slot="{ field, handleChange, handleBlur }"
-                  name="notifications.marketing"
-                >
-                  <BaseSwitchBall
-                    :model-value="field.value"
-                    :disabled="isSubmitting"
-                    label="Marketing"
-                    sublabel="Enable marketing emails"
-                    color="primary"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div v-show="values.notifications?.enabled" class="col-span-12">
-                <Field
-                  v-slot="{ field, handleChange, handleBlur }"
-                  name="notifications.partners"
-                >
-                  <BaseSwitchBall
-                    :model-value="field.value"
-                    :disabled="isSubmitting"
-                    label="Partners"
-                    sublabel="Enable partner emails"
-                    color="primary"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-            </div>
-          </TairoFormGroup>
+            </TairoFormGroup>
+          </div>
         </div>
-      </div>
-    </BaseCard>
-    <TairoFormSave
-      :disabled="isSubmitting"
-      :loading="isSubmitting"
-      @reset="resetForm"
-    />
-  </form>
+      </BaseCard>
+      <TairoFormSave
+        :disabled="isSubmitting"
+        :loading="isSubmitting"
+        @reset="resetForm"
+      />
+    </form>
+  </Profile>
 </template>
 
 <script setup lang="ts">
@@ -233,31 +241,17 @@ import IMask, { type InputMask } from "imask";
 import { Field, useForm } from "vee-validate";
 import { z } from "zod";
 
+definePageMeta({
+  title: "Profile",
+  description: "โปรไฟล์",
+  layout: "custom",
+});
+
 const VALIDATION_TEXT = {
   OLD_PASSWORD_REQUIRED: "Your current password is required",
   NEW_PASSWORD_LENGTH: "Password must be at least 8 characters",
   NEW_PASSWORD_MATCH: "Passwords do not match",
 };
-
-definePageMeta({
-  title: "Settings",
-  preview: {
-    title: "Edit profile 4",
-    description: "For editing a user profile",
-    categories: ["layouts", "profile", "forms"],
-    src: "/img/screens/layouts-subpages-profile-edit-4.png",
-    srcDark: "/img/screens/layouts-subpages-profile-edit-4-dark.png",
-    order: 79,
-  },
-  pageTransition: {
-    enterActiveClass: "transition-all duration-500 ease-out",
-    enterFromClass: "translate-y-20 opacity-0",
-    enterToClass: "translate-y-0 opacity-100",
-    leaveActiveClass: "transition-all duration-200 ease-in",
-    leaveFromClass: "translate-y-0 opacity-100",
-    leaveToClass: "translate-y-20 opacity-0",
-  },
-});
 
 // This is the Zod schema for the form input
 // It's used to define the shape that the form data will have

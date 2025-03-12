@@ -1,404 +1,411 @@
 <template>
-  <form method="POST" action="" class="w-full pb-16" @submit.prevent="onSubmit">
-    <BaseCard shadow="flat">
-      <div class="flex items-center justify-between p-4">
-        <div>
-          <BaseHeading
-            tag="h2"
-            size="sm"
-            weight="medium"
-            lead="normal"
-            class="uppercase tracking-wider"
-          >
-            ข้อมูลส่วนตัว
-          </BaseHeading>
-          <!-- <BaseText size="xs" class="text-muted-400">
-            แก้ไขข้อมูลทั่วไป
-          </BaseText> -->
-        </div>
-        <div class="flex items-center gap-2">
-          <BaseButton class="w-24" to="/profile" color="muted">
-            ยกเลิก
-          </BaseButton>
-          <BaseButton
-            type="submit"
-            color="primary"
-            class="w-24"
-            :disabled="isSubmitting"
-            :loading="isSubmitting"
-          >
-            บันทึก
-          </BaseButton>
-        </div>
-      </div>
-      <div class="p-4">
-        <div class="mx-auto max-w-lg space-y-12 py-8">
-          <BaseMessage v-if="success" @close="success = false" color="success">
-            Your profile has been updated!
-          </BaseMessage>
-          <BaseMessage
-            v-if="fieldsWithErrors"
-            type="danger"
-            color="danger"
-            @close="() => setErrors({})"
-          >
-            This form has {{ fieldsWithErrors }} errors, please check them
-            before submitting
-          </BaseMessage>
-
-          <TairoFormGroup
-            label="Profile picture"
-            sublabel="This is how others will recognize you"
-          >
-            <div
-              class="relative flex flex-col items-center justify-center gap-4"
+  <Profile>
+    <form
+      method="POST"
+      action=""
+      class="w-full pb-16"
+      @submit.prevent="onSubmit"
+    >
+      <BaseCard shadow="flat">
+        <div class="flex items-center justify-between p-4">
+          <div>
+            <BaseHeading
+              tag="h2"
+              size="sm"
+              weight="medium"
+              lead="normal"
+              class="uppercase tracking-wider"
             >
-              <BaseFullscreenDropfile
-                icon="ph:image-duotone"
-                :filter-file-dropped="(file) => file.type.startsWith('image')"
-                @drop="
-                  (value) => {
-                    inputFile = value;
-                  }
-                "
-              />
-              <BaseInputFileHeadless
-                v-slot="{ open, remove, preview, files }"
-                v-model="inputFile"
-                accept="image/*"
+              ข้อมูลส่วนตัว
+            </BaseHeading>
+          </div>
+          <div class="flex items-center gap-2">
+            <BaseButton class="w-24" to="/profile" color="muted">
+              ยกเลิก
+            </BaseButton>
+            <BaseButton
+              type="submit"
+              color="primary"
+              class="w-24"
+              :disabled="isSubmitting"
+              :loading="isSubmitting"
+            >
+              บันทึก
+            </BaseButton>
+          </div>
+        </div>
+        <div class="p-4">
+          <div class="mx-auto max-w-lg space-y-12 py-8">
+            <BaseMessage
+              v-if="success"
+              @close="success = false"
+              color="success"
+            >
+              บันทึกการตั้งค่าของคุณแล้ว
+            </BaseMessage>
+            <BaseMessage
+              v-if="fieldsWithErrors"
+              type="danger"
+              color="danger"
+              @close="() => setErrors({})"
+            >
+              กรุณากรอกข้อมูลให้ครบถ้วนก่อนทำการบันทึก
+            </BaseMessage>
+
+            <TairoFormGroup
+              label="Profile picture"
+              sublabel="This is how others will recognize you"
+            >
+              <div
+                class="relative flex flex-col items-center justify-center gap-4"
               >
-                <div class="relative size-24 mb-5">
-                  <!-- <img
+                <BaseFullscreenDropfile
+                  icon="ph:image-duotone"
+                  :filter-file-dropped="(file) => file.type.startsWith('image')"
+                  @drop="
+                    (value) => {
+                      inputFile = value;
+                    }
+                  "
+                />
+                <BaseInputFileHeadless
+                  v-slot="{ open, remove, preview, files }"
+                  v-model="inputFile"
+                  accept="image/*"
+                >
+                  <div class="relative size-24 mb-5">
+                    <!-- <img
                     v-if="files?.length && files.item(0)"
                     :src="preview(files.item(0)!).value"
                     alt="Upload preview"
                     class="bg-muted-200 dark:bg-muted-700/60 size-24 rounded-full object-cover object-center"
                   /> -->
-                  <img
-                    src="https://image.tmdb.org/t/p/original/uWPCV3XpTAMGEMQShAhr7J54KOx.jpg"
-                    alt="Upload preview"
-                    class="bg-muted-200 dark:bg-muted-700/60 size-24 rounded-full object-cover object-center"
-                  />
-                  <div
-                    v-if="files?.length && files.item(0)"
-                    class="absolute bottom-0 end-0 z-20"
-                  >
-                    <BaseButtonIcon
-                      size="sm"
-                      rounded="full"
-                      data-nui-tooltip="Remove image"
-                      @click="remove(files.item(0)!)"
+                    <img
+                      src="https://image.tmdb.org/t/p/original/uWPCV3XpTAMGEMQShAhr7J54KOx.jpg"
+                      alt="Upload preview"
+                      class="bg-muted-200 dark:bg-muted-700/60 size-24 rounded-full object-cover object-center"
+                    />
+                    <div
+                      v-if="files?.length && files.item(0)"
+                      class="absolute bottom-0 end-0 z-20"
                     >
-                      <Icon name="lucide:x" class="size-4" />
-                    </BaseButtonIcon>
-                  </div>
-                  <div v-else class="absolute bottom-0 end-0 z-20">
-                    <div class="relative" data-nui-tooltip="Upload image">
-                      <BaseButtonIcon size="sm" rounded="full" @click="open">
-                        <Icon name="lucide:plus" class="size-4" />
+                      <BaseButtonIcon
+                        size="sm"
+                        rounded="full"
+                        data-nui-tooltip="Remove image"
+                        @click="remove(files.item(0)!)"
+                      >
+                        <Icon name="lucide:x" class="size-4" />
                       </BaseButtonIcon>
                     </div>
+                    <div v-else class="absolute bottom-0 end-0 z-20">
+                      <div class="relative" data-nui-tooltip="Upload image">
+                        <BaseButtonIcon size="sm" rounded="full" @click="open">
+                          <Icon name="lucide:plus" class="size-4" />
+                        </BaseButtonIcon>
+                      </div>
+                    </div>
                   </div>
+                </BaseInputFileHeadless>
+                <div
+                  v-if="fileError"
+                  class="text-danger-600 inline-block font-sans text-[.8rem]"
+                >
+                  {{ fileError }}
                 </div>
-              </BaseInputFileHeadless>
-              <div
-                v-if="fileError"
-                class="text-danger-600 inline-block font-sans text-[.8rem]"
-              >
-                {{ fileError }}
               </div>
-            </div>
-          </TairoFormGroup>
+            </TairoFormGroup>
 
-          <TairoFormGroup
-            label="Profile Info"
-            sublabel="Others diserve to know you more"
-          >
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="profile.firstName"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="ph:user-duotone"
-                    placeholder="First name"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            <TairoFormGroup
+              label="Profile Info"
+              sublabel="Others diserve to know you more"
+            >
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="profile.firstName"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="ph:user-duotone"
+                      placeholder="First name"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="profile.lastName"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="ph:user-duotone"
+                      placeholder="Last name"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="profile.role"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="ph:suitcase-duotone"
+                      placeholder="Job title"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="profile.location"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="ph:map-pin-duotone"
+                      placeholder="Location"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 mb-5">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="profile.bio"
+                  >
+                    <BaseTextarea
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      rows="4"
+                      placeholder="About you / Short bio..."
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="profile.lastName"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="ph:user-duotone"
-                    placeholder="Last name"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="profile.role"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="ph:suitcase-duotone"
-                    placeholder="Job title"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="profile.location"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="ph:map-pin-duotone"
-                    placeholder="Location"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 mb-5">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="profile.bio"
-                >
-                  <BaseTextarea
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    rows="4"
-                    placeholder="About you / Short bio..."
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-            </div>
-          </TairoFormGroup>
+            </TairoFormGroup>
 
-          <TairoFormGroup
-            label="Professional Info"
-            sublabel="This can help you to win some opportunities"
-          >
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="info.experience"
-                >
-                  <BaseListbox
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    :items="experience"
-                    placeholder="Experience"
-                    rounded="sm"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            <TairoFormGroup
+              label="Professional Info"
+              sublabel="This can help you to win some opportunities"
+            >
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="info.experience"
+                  >
+                    <BaseListbox
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      :items="experience"
+                      placeholder="Experience"
+                      rounded="sm"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="info.firstJob"
+                  >
+                    <BaseListbox
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      :items="answers"
+                      :properties="{ label: 'label', value: 'value' }"
+                      placeholder="Is this your first job?"
+                      rounded="sm"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6 mb-5">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="info.flexible"
+                  >
+                    <BaseListbox
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      :items="answers"
+                      :properties="{ label: 'label', value: 'value' }"
+                      placeholder="Are you flexible?"
+                      rounded="sm"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6 mb-5">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="info.remote"
+                  >
+                    <BaseListbox
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      :items="answers"
+                      :properties="{ label: 'label', value: 'value' }"
+                      placeholder="Do you work remotely?"
+                      rounded="sm"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="info.firstJob"
-                >
-                  <BaseListbox
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    :items="answers"
-                    :properties="{ label: 'label', value: 'value' }"
-                    placeholder="Is this your first job?"
-                    rounded="sm"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6 mb-5">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="info.flexible"
-                >
-                  <BaseListbox
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    :items="answers"
-                    :properties="{ label: 'label', value: 'value' }"
-                    placeholder="Are you flexible?"
-                    rounded="sm"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6 mb-5">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="info.remote"
-                >
-                  <BaseListbox
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    :items="answers"
-                    :properties="{ label: 'label', value: 'value' }"
-                    placeholder="Do you work remotely?"
-                    rounded="sm"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-            </div>
-          </TairoFormGroup>
+            </TairoFormGroup>
 
-          <TairoFormGroup
-            label="Social Profiles"
-            sublabel="This can help others finding you on social media"
-          >
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.facebook"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:facebook-f"
-                    placeholder="Facebook URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
+            <TairoFormGroup
+              label="Social Profiles"
+              sublabel="This can help others finding you on social media"
+            >
+              <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.facebook"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:facebook-f"
+                      placeholder="Facebook URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.twitter"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:twitter"
+                      placeholder="Twitter URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.dribbble"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:dribbble"
+                      placeholder="Dribbble URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.instagram"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:instagram"
+                      placeholder="Instagram URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.github"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:github"
+                      placeholder="Github URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                  <Field
+                    v-slot="{ field, errorMessage, handleChange, handleBlur }"
+                    name="social.gitlab"
+                  >
+                    <BaseInput
+                      :model-value="field.value"
+                      :error="errorMessage"
+                      :disabled="isSubmitting"
+                      type="text"
+                      icon="fa6-brands:gitlab"
+                      placeholder="Gitlab URL"
+                      @update:model-value="handleChange"
+                      @blur="handleBlur"
+                    />
+                  </Field>
+                </div>
               </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.twitter"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:twitter"
-                    placeholder="Twitter URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.dribbble"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:dribbble"
-                    placeholder="Dribbble URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.instagram"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:instagram"
-                    placeholder="Instagram URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.github"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:github"
-                    placeholder="Github URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-              <div class="col-span-12 sm:col-span-6">
-                <Field
-                  v-slot="{ field, errorMessage, handleChange, handleBlur }"
-                  name="social.gitlab"
-                >
-                  <BaseInput
-                    :model-value="field.value"
-                    :error="errorMessage"
-                    :disabled="isSubmitting"
-                    type="text"
-                    icon="fa6-brands:gitlab"
-                    placeholder="Gitlab URL"
-                    @update:model-value="handleChange"
-                    @blur="handleBlur"
-                  />
-                </Field>
-              </div>
-            </div>
-          </TairoFormGroup>
+            </TairoFormGroup>
+          </div>
         </div>
-      </div>
-    </BaseCard>
-    <TairoFormSave
-      :disabled="isSubmitting"
-      :loading="isSubmitting"
-      @reset="resetForm"
-    />
-  </form>
+      </BaseCard>
+      <TairoFormSave
+        :disabled="isSubmitting"
+        :loading="isSubmitting"
+        @reset="resetForm"
+      />
+    </form>
+  </Profile>
 </template>
 
 <script setup lang="ts">
@@ -407,23 +414,9 @@ import { Field, useFieldError, useForm } from "vee-validate";
 import { z } from "zod";
 
 definePageMeta({
-  title: "Edit Profile",
-  preview: {
-    title: "Edit profile 1",
-    description: "For editing a user profile",
-    categories: ["layouts", "profile", "forms"],
-    src: "/img/screens/layouts-subpages-profile-edit-1.png",
-    srcDark: "/img/screens/layouts-subpages-profile-edit-1-dark.png",
-    order: 76,
-  },
-  pageTransition: {
-    enterActiveClass: "transition-all duration-500 ease-out",
-    enterFromClass: "translate-y-20 opacity-0",
-    enterToClass: "translate-y-0 opacity-100",
-    leaveActiveClass: "transition-all duration-200 ease-in",
-    leaveFromClass: "translate-y-0 opacity-100",
-    leaveToClass: "translate-y-20 opacity-0",
-  },
+  title: "Profile",
+  description: "โปรไฟล์",
+  layout: "custom",
 });
 
 // This is the object that will contain the validation messages

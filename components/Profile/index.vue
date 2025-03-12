@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1440px] m-auto min-h-screen overflow-hidden">
+  <div class="max-w-[1440px] m-auto min-h-screen">
     <div class="grid gap-8 sm:grid-cols-12">
       <div class="col-span-12 sm:col-span-4">
         <div class="flex w-full items-center gap-2">
@@ -42,18 +42,13 @@
         </div>
       </div>
       <div class="col-span-12 sm:col-span-8">
-        <NuxtPage />
+        <!-- <NuxtPage /> -->
+        <slot />
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-definePageMeta({
-  title: "Profile",
-  description: "โปรไฟล์",
-  layout: "custom",
-});
-</script>
+<script lang="ts" setup></script>
 
 <style></style>
