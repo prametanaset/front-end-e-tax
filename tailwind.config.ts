@@ -53,7 +53,7 @@ export default withShurikenUI({
                     focus: "muted-50",
                   },
                   dark: {
-                    base: "red-500",
+                    base: "muted-700",
                     hover: "muted-600",
                     active: "muted-700",
                     focus: "muted-600",

@@ -1,6 +1,6 @@
 <template>
   <Profile>
-    <BaseCard class="w-full" shadow="flat">
+    <BaseCard class="w-full dark:text-white" shadow="flat">
       <div>
         <form method="POST" action="" class="" @submit.prevent="onSubmit">
           <div class="space-y-8">

@@ -7,7 +7,7 @@
             src="https://image.tmdb.org/t/p/original/uWPCV3XpTAMGEMQShAhr7J54KOx.jpg"
             size="md"
           />
-          <div class="">
+          <div class="dark:text-white">
             <BaseHeading tag="h2" size="md" weight="medium" lead="none">
               Remu Suzumori
             </BaseHeading>

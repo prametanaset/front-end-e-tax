@@ -3,7 +3,7 @@
     <form
       method="POST"
       action=""
-      class="w-full pb-16"
+      class="w-full pb-16 dark:text-white"
       @submit.prevent="onSubmit"
     >
       <BaseCard shadow="flat">

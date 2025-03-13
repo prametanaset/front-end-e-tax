@@ -151,7 +151,7 @@ const props = defineProps<{
                 ]"
                 @click.passive="close"
               >
-                <Icon name="ph:gear-six-duotone" class="size-5" />
+                <Icon name="tdesign:mode-dark" class="size-5" />
                 <div class="ms-3">
                   <h6
                     class="font-heading text-muted-800 text-xs font-medium leading-none dark:text-white"
