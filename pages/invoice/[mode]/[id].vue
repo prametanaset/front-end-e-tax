@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-[1440px] m-auto pb-20 dark:text-white">
+  <div class="max-w-[1440px] m-auto pb-20 dark:text-white text-black">
     <div class="grid grid-cols-12 gap-6">
       <div class="ltablet:col-span-8 col-span-12 lg:col-span-8">
         <div class="flex flex-col gap-6">
@@ -61,12 +61,12 @@
                 >
                   หมายเลขใบแจ้งหนี้
                 </BaseHeading>
-                <BaseParagraph weight="semibold" class="mb-2 text-white">
+                <BaseParagraph weight="semibold" class="mb-2">
                   INV-2023-276
                 </BaseParagraph>
-                <BaseParagraph size="sm" class="mb-1 text-muted-400">
-                  วันที่ออกใบ :
-                  <span class="text-white">{{
+                <BaseParagraph size="sm" class="mb-1">
+                  <span class="text-muted-400">วันที่ออกใบ : </span>
+                  <span class="dark:text-white">{{
                     formatThaiDate(new Date())
                   }}</span>
                 </BaseParagraph>
@@ -81,7 +81,7 @@
                 >
                   Billed to
                 </BaseHeading>
-                <BaseParagraph weight="semibold" class="mb-2 text-white">
+                <BaseParagraph weight="semibold" class="mb-2">
                   Kendra Wilson
                 </BaseParagraph>
                 <BaseParagraph
@@ -92,7 +92,7 @@
                     >ที่อยู่ <Icon name="tdesign:edit"
                   /></span>
                 </BaseParagraph>
-                <BaseParagraph size="sm" class="mb-1 text-white">
+                <BaseParagraph size="sm" class="mb-1">
                   21, Jumpwall Street Suite G2, Block 23 Los Angeles, USA
                 </BaseParagraph>
               </div>
@@ -177,10 +177,12 @@
                   <tbody>
                     <tr>
                       <td class="px-2 py-4">
-                        <BaseInput
-                          v-model="itemName"
-                          placeholder="Name of the item"
-                        />
+                        <BaseParagraph
+                          >{{ itemName }}
+                          <span class="text-xs text-muted-400"
+                            >ราคารวมภาษีแล้ว</span
+                          ></BaseParagraph
+                        >
                       </td>
                       <td class="px-2 py-4">
                         <BaseInput v-model="itemHours" placeholder="0" />
@@ -374,7 +376,7 @@
               <!--Customer-->
               <BaseCard rounded="md" elevated class="p-6">
                 <div
-                  class="border-muted-200 dark:border-muted-800 mb-6 flex items-center gap-4 border-b pb-8"
+                  class="border-muted-200 dark:border-muted-200 mb-6 flex items-center gap-4 border-b pb-8"
                 >
                   <BaseAvatar
                     src="/img/avatars/10.svg"
@@ -442,7 +444,7 @@
                   </BaseParagraph>
                 </div>
                 <div
-                  class="border-muted-200 dark:border-muted-800 border-b pb-4"
+                  class="border-muted-200 dark:border-muted-200 border-b pb-4"
                 >
                   <BaseHeading
                     weight="semibold"
