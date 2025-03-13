@@ -12,3 +12,9 @@
 .fade-leave-to {
   opacity: 0;
 }
+
+.text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

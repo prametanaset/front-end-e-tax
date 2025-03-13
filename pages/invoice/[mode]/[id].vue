@@ -46,10 +46,10 @@
               class="bg-primary-800 relative flex flex-col justify-between gap-y-6 overflow-hidden rounded-2xl p-8 sm:flex-row"
             >
               <div
-                class="absolute -bottom-10 -start-10 size-48 rounded-full bg-white/10"
+                class="absolute -bottom-10 -start-10 size-48 rounded-full dark:bg-white/10 bg-muted-100"
               />
               <div
-                class="absolute -end-24 -top-10 hidden size-80 rounded-full bg-white/10 sm:block"
+                class="absolute -end-24 -top-10 hidden size-80 rounded-full dark:bg-white/10 bg-muted-100 sm:block"
               />
               <div class="relative z-20">
                 <BaseHeading
@@ -151,13 +151,16 @@
                           ราคา
                         </BaseText>
                       </th>
-                      <th class="min-w-[60px] px-2 text-start sm:min-w-[60px]">
+                      <th
+                        v-if="addDiscoundItem"
+                        class="min-w-[60px] px-2 text-start sm:min-w-[60px]"
+                      >
                         <BaseText
                           size="xs"
                           weight="semibold"
                           class="text-muted-400"
                         >
-                          Tax
+                          ส่วนลด
                         </BaseText>
                       </th>
                       <th
@@ -168,7 +171,7 @@
                           weight="semibold"
                           class="text-muted-400"
                         >
-                          Subtotal
+                          ราคาของรวมสินค้า
                         </BaseText>
                       </th>
                     </tr>
@@ -177,10 +180,14 @@
                   <tbody>
                     <tr>
                       <td class="px-2 py-4">
-                        <BaseParagraph
-                          >{{ itemName }}
-                          <span class="text-xs text-muted-400"
-                            >ราคารวมภาษีแล้ว</span
+                        <BaseParagraph class="flex items-center">
+                          <div class="text-ellipsis max-w-[12rem]">
+                            {{ itemName }}
+                          </div>
+                          <span
+                            class="text-xs text-muted-400 text-sky-500 text-center"
+                          >
+                            &nbsp; ราคารวมภาษีแล้ว</span
                           ></BaseParagraph
                         >
                       </td>
@@ -190,20 +197,45 @@
                       <td class="px-2 py-4">
                         <BaseInput v-model="hourRate" placeholder="0.00" />
                       </td>
-                      <td class="px-2 py-4">
-                        <BaseInput
-                          v-model="taxRate"
-                          icon="lucide:percent"
-                          placeholder="0"
-                        />
+                      <td v-if="addDiscoundItem" class="px-2 py-4">
+                        <BaseButtonGroup>
+                          <BaseInput
+                            v-model="taxRate"
+                            placeholder="0"
+                            type="number"
+                          />
+                          <BaseSelect
+                            v-model="discountType"
+                            :classes="{
+                              wrapper: 'w-36',
+                            }"
+                          >
+                            <option value="bath">บาท</option>
+
+                            <option value="percen">%</option>
+                          </BaseSelect>
+                        </BaseButtonGroup>
                       </td>
                       <td class="px-2 py-4">
                         <BaseInput
                           v-model="itemSubtotal"
-                          icon="lucide:dollar-sign"
                           placeholder="0.00"
                           readonly
                         />
+                      </td>
+                      <td class="px-2 py-4">
+                        <BaseDropdown
+                          variant="context"
+                          label="Dropdown"
+                          placement="bottom-end"
+                          rounded="md"
+                        >
+                          <BaseDropdownItem
+                            title="เพิ่มส่วนลด"
+                            @click="addDiscoundItem = !addDiscoundItem"
+                            rounded="md"
+                          />
+                        </BaseDropdown>
                       </td>
                     </tr>
                   </tbody>
@@ -327,7 +359,7 @@
                       </div>
                       <div class="flex items-center justify-between">
                         <BaseParagraph size="sm" class="text-muted-400">
-                          Taxes
+                          ภาษี
                         </BaseParagraph>
                         <BaseParagraph
                           size="sm"
@@ -343,7 +375,7 @@
                         class="border-muted-200 dark:border-white flex items-center justify-between border-t pt-6"
                       >
                         <BaseParagraph size="sm" class="text-muted-400">
-                          Total
+                          ราคารวม
                         </BaseParagraph>
                         <BaseParagraph
                           size="sm"
@@ -452,7 +484,7 @@
                     lead="none"
                     class="mb-3"
                   >
-                    {{ itemSubtotal.toLocaleString() }}
+                    {{ Number(itemSubtotal).toLocaleString() }}
                     <BaseText size="xs" class="text-muted-400 inline">
                       (Tax incl.)
                     </BaseText>
@@ -528,10 +560,10 @@ const itemName = ref("UI/UX Design");
 const itemHours = ref(20);
 const hourRate = ref(50.45);
 const taxRate = ref(6.5);
+const discountType = ref("bath");
 
 const previewInvoice = ref(false);
-
-const vatStyle = ref([{ label: "ส่วนลด", value: "discount" }]);
+const addDiscoundItem = ref(false);
 
 const itemSubtotal = computed(() =>
   (
