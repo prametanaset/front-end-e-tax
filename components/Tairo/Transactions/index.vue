@@ -4,7 +4,7 @@
     <BaseHeading weight="medium" class="text-muted-800 dark:text-muted-100">
       รายการใบกำกับภาษี
     </BaseHeading>
-    <div class="w-full max-w-sm mt-3">
+    <div class="w-full max-w-[100%] mt-3">
       <BaseTabSlider v-slot="{ activeValue }" model-value="team" rounded="sm" :tabs="[
         { label: 'ทั้งหมด', value: 'team' },
         { label: 'เพิ่มหนี้/ลดหนี้', value: 'projects' },
@@ -28,12 +28,13 @@
       </div>
 
       <div class="max-w-[40%]">
-        <button
-          class="bg-purple-500 hover:bg-gray-400 text-gray-800 py-2 px-1 pr-2 rounded-lg inline-flex items-center " to="/invoice/create/invoice">
-          <Icon name="lucide:plus" class="fill-current w-4 h-4 mr-1 text-white" />
-          <span class="text-sm my-[2px] text-white">สร้างใบกำกับภาษี</span>
-
-        </button>
+        <NuxtLink to="/invoice/create/invoice">
+          <button
+            class="bg-purple-500 hover:bg-gray-400 text-gray-800 py-2 px-1 pr-2 rounded-lg inline-flex items-center ">
+            <Icon name="lucide:plus" class="fill-current w-4 h-4 mr-1 text-white" />
+            <span class="text-sm my-[2px] text-white">สร้างใบกำกับภาษี</span>
+          </button>
+        </NuxtLink>
       </div>
     </div>
 
@@ -41,9 +42,11 @@
 
     <div class="col-span-12 -mx-2">
       <BaseCard rounded="md" class="p-3">
-        <div class="mb-2 pb-3 flex items-center justify-between border-b border-muted-200 dark:border-slate-700 bg-transparent">
+        <div
+          class="mb-2 pb-3 flex items-center justify-between border-b border-muted-200 dark:border-slate-700 bg-transparent">
           <div>
-            <button class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-1 dark:bg-slate-700 px-2 rounded-lg inline-flex items-center">
+            <button
+              class="bg-gray-100 hover:bg-gray-400 text-gray-600 font-semibold py-1 dark:bg-slate-700 px-2 rounded-lg inline-flex items-center">
 
               <span class="text-xs mt-1  dark:text-white">CSV</span>
               <Icon name="lucide:arrow-down-to-line" class="fill-current w-3 h-3 ml-1 dark:text-white" />
