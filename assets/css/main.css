@@ -18,3 +18,27 @@
   white-space: nowrap;
   overflow: hidden;
 }
+.nui-tab-slider.nui-tabs-default .nui-tab-slider-item:not(.nui-active) {
+  color: rgb(25 25 25) !important;
+}
+
+.nui-tab-slider .nui-tab-slider-track {
+  background-color: rgb(236 240 243) !important;
+}
+
+.nui-tab-slider.nui-tabs-default
+  .nui-tab-slider-item:not(.nui-active):where(
+    [class~="dark-mode"],
+    [class~="dark-mode"] *
+  ) {
+  color: rgb(148 163 184 / var(--tw-text-opacity, 1)) !important;
+}
+
+.nui-tab-slider
+  .nui-tab-slider-track:where([class~="dark-mode"], [class~="dark-mode"] *) {
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity, 1)) !important;
+}
+
+.nui-tab-slider.nui-tabs-md.nui-tabs-three-slots .nui-tab-slider-track {
+  max-width: 100% !important;
+}

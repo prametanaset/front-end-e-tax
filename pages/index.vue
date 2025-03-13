@@ -41,7 +41,8 @@
     </div>
 
     <div>
-      <Table />
+      <Table v-if="screenWidth >= 768" />
+      <TairoTransactions v-else class="mb-4" />
     </div>
   </div>
 </template>
@@ -49,12 +50,27 @@
 <script lang="ts" setup>
 definePageMeta({
   title: "Home Page",
-  description: "รายการใบแจ้งหนี้",
+  description: "รายงานใบแจ้งหนี้",
   layout: "custom",
 });
 
 useHead({
   title: "e-tax | Dashboard",
+});
+
+const screenWidth = ref(0); // Start with 0 or a default value
+
+const updateWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  updateWidth(); // Set initial width
+  window.addEventListener("resize", updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWidth);
 });
 </script>
 

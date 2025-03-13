@@ -16,7 +16,7 @@ const props = withDefaults(
     <div
       class="border-muted-200 dark:border-muted-700 border"
       :class="[
-        props.scrollable && 'max-h-80 overflow-auto', // Adjust max height as needed
+        props.scrollable && 'max-h-3/4 overflow-auto', // Adjust max height as needed
         props.rounded === 'sm' && 'rounded-md',
         props.rounded === 'md' && 'rounded-lg',
         props.rounded === 'lg' && 'rounded-xl',
