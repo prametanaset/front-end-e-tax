@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 definePageMeta({
   title: "Home Page",
-  description: "รายการใบแจ้งหนี้",
+  description: "รายงานใบแจ้งหนี้",
   layout: "custom",
 });
 
