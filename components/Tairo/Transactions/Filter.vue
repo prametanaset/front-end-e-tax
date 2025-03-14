@@ -1,9 +1,10 @@
 <template>
   <div>
     <CustomBaseDropdown
-      variant="text"
-      label=""
+      variant="button"
+      label="ตัวกรอง"
       placement="bottom-start"
+      buttonSize="sm"
     >
       <BaseDropdownItem
         to="#"

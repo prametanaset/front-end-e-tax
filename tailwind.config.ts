@@ -82,6 +82,54 @@ export default withShurikenUI({
             },
           },
         },
+        tag: {
+          variant: {
+            solid: {
+              success: {
+                font: {
+                  color: {
+                    light: "[#006228]",
+                    dark: "[#006228]",
+                  },
+                },
+                background: {
+                  light: "[#dbf4cb]",
+                  dark: "[#dbf4cb]",
+                },
+                border: {
+                  light: "[#dbf4cb]",
+                  dark: "[#dbf4cb]",
+                },
+                shadow: {
+                  size: "xl",
+                  light: "success-500/30",
+                  dark: "success-500/20",
+                },
+              },
+              danger: {
+                font: {
+                  color: {
+                    light: '[#b33534]',
+                    dark: '[#b33534]',
+                  },
+                },
+                background: {
+                  light: '[#ffdfe1]',
+                  dark: '[#ffdfe1]',
+                },
+                border: {
+                  light: '[#ffdfe1]',
+                  dark: '[#ffdfe1]',
+                },
+                shadow: {
+                  size: 'xl',
+                  light: 'danger-500/30',
+                  dark: 'danger-500/20',
+                },
+              },
+            },
+          },
+        },
       },
     },
   },

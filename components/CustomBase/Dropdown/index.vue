@@ -235,14 +235,15 @@ const textColors = {
               :disabled="props.disabled"
               class="!pe-3 !ps-4"
             >
+              
+              <Icon
+                name="lucide:filter"
+                class="nui-chevron dark:text-white"
+                :class="open"
+              />
               <slot name="label" v-bind="{ open, close }">
                 <span>{{ props.label }}</span>
               </slot>
-              <Icon
-                name="lucide:settings-2"
-                class="nui-chevron dark:text-white"
-                :class="open && 'rotate-180'"
-              />
             </BaseButton>
             <button
               v-else-if="props.variant === 'context'"
@@ -266,14 +267,15 @@ const textColors = {
                 buttonColor && textColors[buttonColor],
               ]"
             >
+              
+
+              <Icon
+                name="lucide:filter"
+                class="nui-chevron dark:text-white"
+              />
               <slot name="label" v-bind="{ open, close }">
                 <span class="nui-text-button-inner">{{ props.label }}</span>
               </slot>
-
-              <Icon
-                name="lucide:settings-2"
-                class="nui-chevron dark:text-white"
-              />
             </button>
           </slot>
         </MenuButton>

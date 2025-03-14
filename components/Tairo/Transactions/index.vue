@@ -5,11 +5,11 @@
       รายการใบกำกับภาษี
     </BaseHeading>
     <div class="w-full max-w-[100%] mt-3">
-      <BaseTabSlider v-slot="{ activeValue }" model-value="team" rounded="sm" :tabs="[
+      <BaseTabSlider v-slot="{ activeValue }" weg model-value="team" rounded="sm" :tabs="[
         { label: 'ทั้งหมด', value: 'team' },
         { label: 'เพิ่มหนี้/ลดหนี้', value: 'projects' },
         { label: 'ใบกำกับภาษี', value: 'tasks' },
-      ]">
+      ]" class="font-normal">
       </BaseTabSlider>
     </div>
 
@@ -43,7 +43,7 @@
     <div class="col-span-12 -mx-2">
       <BaseCard rounded="md" class="p-3">
         <div
-          class="mb-2 pb-3 flex items-center justify-between border-b border-muted-200 dark:border-slate-700 bg-transparent">
+          class="mb-2 pb-3 flex items-center justify-between  dark:border-slate-700 bg-transparent">
           <div>
             <button
               class="bg-gray-100 hover:bg-gray-400 text-gray-600 font-semibold py-1 dark:bg-slate-700 px-2 rounded-lg inline-flex items-center">
@@ -54,7 +54,7 @@
           </div>
           <TairoTransactionsFilter />
         </div>
-        <div v-if="true" class="space-y-1">
+        <div v-if="false" class="space-y-1">
           <!--Item-->
           <div class="flex items-center gap-3 py-2 px-2 hover:bg-slate-50 rounded-2xl dark:hover:bg-[#334155]">
             <!-- <div
@@ -166,7 +166,7 @@
             </div>
           </div>
         </div>
-        <CustomBaseAccordion v-else :items="accordion" exclusive action="chevron" />
+        <CustomBaseAccordion v-else :items="accordion" exclusive class="-mx-3" />
       </BaseCard>
     </div>
   </div>
@@ -179,20 +179,116 @@ function asDollar(val: number): string {
 
 const accordion = ref([
   {
-    title: 'Accordion Item 1',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quo tandem modo? Inde igitur, inquit, ordiendum est. Primum quid tu dicis breve? Duo Reges: constructio interrete.',
+    title: 'สมชาย ใจดี',
+    email: 'somchai@example.com',
+    status: 3,
+    content: {
+      id: "INV0001-01-001",
+      subject: "ใบกำกับภาษี ค่าบริการเดือนกันยายน 2566",
+      createdAt: "30 สิงหาคม 2566 15:47 น.",
+      updatedAt: "2 กันยายน 2566 02:29 น."
+    }
   },
   {
-    title: 'Accordion Item 2',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quo tandem modo? Inde igitur, inquit, ordiendum est. Primum quid tu dicis breve? Duo Reges: constructio interrete.',
+    title: 'ปราณี รักสงบ',
+    email: 'pranee@example.com',
+    status: 2,
+    content: {
+      id: "INV0002-01-002",
+      subject: "ใบลดหนี้ ค่าบริการเดือนตุลาคม 2566",
+      createdAt: "5 ตุลาคม 2566 10:15 น.",
+      updatedAt: "7 ตุลาคม 2566 18:45 น."
+    }
   },
   {
-    title: 'Accordion Item 3',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quo tandem modo? Inde igitur, inquit, ordiendum est. Primum quid tu dicis breve? Duo Reges: constructio interrete.',
+    title: 'กฤษณะ ว่องไว',
+    email: 'krit@example.com',
+    status: 1,
+    content: {
+      id: "INV0003-01-003",
+      subject: "ใบกำกับภาษี ค่าธรรมเนียมสมาชิกประจำปี",
+      createdAt: "12 มกราคม 2567 08:30 น.",
+      updatedAt: "15 มกราคม 2567 14:10 น."
+    }
   },
+  {
+    title: 'ณัฐชา สุขใจ',
+    email: 'nutcha@example.com',
+    status: 3,
+    content: {
+      id: "INV0004-01-004",
+      subject: "ใบเพิ่มหนี้ ค่าบริการสนับสนุนทางเทคนิค",
+      createdAt: "20 กุมภาพันธ์ 2567 16:20 น.",
+      updatedAt: "22 กุมภาพันธ์ 2567 09:55 น."
+    }
+  },
+  {
+    title: 'อนุชา รุ่งเรือง',
+    email: 'anucha@example.com',
+    status: 2,
+    content: {
+      id: "INV0005-01-005",
+      subject: "ใบกำกับภาษี ค่าพัฒนาเว็บไซต์",
+      createdAt: "28 มีนาคม 2567 12:05 น.",
+      updatedAt: "30 มีนาคม 2567 17:30 น."
+    }
+  },
+  {
+    title: 'วีรศักดิ์ ตั้งใจ',
+    email: 'wirot@example.com',
+    status: 3,
+    content: {
+      id: "INV0006-01-006",
+      subject: "ใบลดหนี้ ค่าบริการออกแบบ UX/UI",
+      createdAt: "10 เมษายน 2567 11:45 น.",
+      updatedAt: "12 เมษายน 2567 20:10 น."
+    }
+  },
+  {
+    title: 'สุภาวรรณ สงบใจ',
+    email: 'supawan@example.com',
+    status: 2,
+    content: {
+      id: "INV0007-01-007",
+      subject: "ใบเพิ่มหนี้ ค่าบริการให้คำปรึกษาทางธุรกิจ",
+      createdAt: "15 พฤษภาคม 2567 09:30 น.",
+      updatedAt: "17 พฤษภาคม 2567 15:40 น."
+    }
+  },
+  {
+    title: 'พิมพ์ลภัส สร้างสุข',
+    email: 'pim@example.com',
+    status: 1,
+    content: {
+      id: "INV0008-01-008",
+      subject: "ใบกำกับภาษี ค่าธรรมเนียมลิขสิทธิ์ซอฟต์แวร์",
+      createdAt: "25 มิถุนายน 2567 14:50 น.",
+      updatedAt: "28 มิถุนายน 2567 19:05 น."
+    }
+  },
+  {
+    title: 'สมหมาย ขยันดี',
+    email: 'somchai2@example.com',
+    status: 3,
+    content: {
+      id: "INV0009-01-009",
+      subject: "ใบลดหนี้ ค่าติดตั้งระบบเครือข่าย",
+      createdAt: "10 กรกฎาคม 2567 07:10 น.",
+      updatedAt: "12 กรกฎาคม 2567 11:20 น."
+    }
+  },
+  {
+    title: 'ธัญญา ศรีสุข',
+    email: 'thanya@example.com',
+    status: 2,
+    content: {
+      id: "INV0010-01-010",
+      subject: "ใบเพิ่มหนี้ ค่าที่ปรึกษาด้านการตลาด",
+      createdAt: "1 สิงหาคม 2567 18:25 น.",
+      updatedAt: "3 สิงหาคม 2567 22:15 น."
+    }
+  }
+
 ])
 </script>
 
