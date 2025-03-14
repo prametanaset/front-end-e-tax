@@ -3,39 +3,35 @@
     <div class="grid grid-cols-12 gap-6">
       <div class="ltablet:col-span-8 col-span-12 lg:col-span-8">
         <div class="flex flex-col gap-6">
-          <BaseCard rounded="md" class="p-6">
-            <div class="mb-8 flex items-center gap-4">
-              <BaseAvatar
-                src="/img/logos/companies/amazon.svg"
-                alt="Amazon"
-                size="md"
-                rounded="none"
-                mask="blob"
-                class="bg-muted-100 dark:bg-muted-900"
-              />
-              <div>
-                <BaseHeading
-                  weight="medium"
-                  size="lg"
-                  lead="none"
-                  class="line-clamp-1"
-                >
-                  ชื่อร้านค้า
-                </BaseHeading>
-                <BaseParagraph size="xs" class="text-muted-400 line-clamp-1">
-                  Ecommerce Company
-                </BaseParagraph>
+          <BaseCard rounded="md" class="p-6 z-0">
+            <div class="mb-8 sm:flex items-center gap-4">
+              <div class="flex gap-4 items-center">
+                <BaseAvatar
+                  src="/img/logos/companies/amazon.svg"
+                  alt="Amazon"
+                  size="md"
+                  rounded="none"
+                  mask="blob"
+                  class="bg-muted-100 dark:bg-muted-900"
+                />
+                <div>
+                  <BaseHeading
+                    weight="medium"
+                    size="lg"
+                    lead="none"
+                    class="line-clamp-1"
+                  >
+                    ชื่อร้านค้า
+                  </BaseHeading>
+                  <BaseParagraph size="xs" class="text-muted-400 line-clamp-1">
+                    Ecommerce Company
+                  </BaseParagraph>
+                </div>
               </div>
-              <div class="ms-auto">
-                <div class="text-end">
+              <div class="ms-auto xs:mt-2 xs:w-full">
+                <div class="text-end xs:text-start">
                   <BaseParagraph size="sm" class="text-muted-400 line-clamp-1">
-                    48, Church Street
-                  </BaseParagraph>
-                  <BaseParagraph size="sm" class="text-muted-400 line-clamp-1">
-                    Los Angeles, 92384
-                  </BaseParagraph>
-                  <BaseParagraph size="sm" class="text-muted-400 line-clamp-1">
-                    United States
+                    48, Church Street Los Angeles, 92384 United States
                   </BaseParagraph>
                 </div>
               </div>
@@ -102,222 +98,100 @@
                 <div>
                   <BaseHeading
                     weight="medium"
-                    size="sm"
+                    size="md"
                     class="text-mute-800 dark:text-muted-100"
                   >
-                    Invoice details
+                    รายการสินค้า
                   </BaseHeading>
-                  <BaseParagraph size="xs" class="text-muted-400">
-                    List the invoiced items
-                  </BaseParagraph>
                 </div>
-                <!-- <div class="ms-auto">
-                  <BaseButton rounded="md"> Customize </BaseButton>
-                </div> -->
               </div>
               <div
                 class="border-muted-200 dark:border-white w-full overflow-x-auto border-b pb-8"
               >
-                <table class="w-full text-start">
-                  <thead>
-                    <tr>
-                      <!-- เพิ่ม <tr> ครอบทุก <th> -->
-                      <th
-                        class="min-w-[200px] px-2 text-start sm:w-1/3 sm:min-w-[auto]"
+                <!-- item table -->
+                <BaseCard
+                  class="sm:flex flex-col xs:flex-row p-3 gap-4 items-center"
+                >
+                  <BaseHeading
+                    class="flex flex-col justify-start items-center w-full"
+                  >
+                    <div class="w-full text-2md">
+                      {{ itemName }}
+                      <span
+                        class="text-xs text-muted-400 text-sky-500 text-center"
                       >
-                        <BaseText
-                          size="xs"
-                          weight="semibold"
-                          class="text-muted-400"
-                        >
-                          สินค้า
-                        </BaseText>
-                      </th>
-                      <th class="min-w-[90px] px-2 text-start sm:min-w-[auto]">
-                        <BaseText
-                          size="xs"
-                          weight="semibold"
-                          class="text-muted-400"
-                        >
-                          จำนวน
-                        </BaseText>
-                      </th>
-                      <th class="min-w-[120px] px-2 text-start sm:min-w-[auto]">
-                        <BaseText
-                          size="xs"
-                          weight="semibold"
-                          class="text-muted-400"
-                        >
-                          ราคา
-                        </BaseText>
-                      </th>
-                      <th
-                        v-if="addDiscoundItem"
-                        class="min-w-[60px] px-2 text-start sm:min-w-[60px]"
+                        &nbsp; *ราคารวมภาษีแล้ว</span
                       >
-                        <BaseText
-                          size="xs"
-                          weight="semibold"
-                          class="text-muted-400"
-                        >
-                          ส่วนลด
-                        </BaseText>
-                      </th>
-                      <th
-                        class="min-w-[120px] px-2 text-start sm:min-w-[120px]"
-                      >
-                        <BaseText
-                          size="xs"
-                          weight="semibold"
-                          class="text-muted-400"
-                        >
-                          ราคาของรวมสินค้า
-                        </BaseText>
-                      </th>
-                    </tr>
-                    <!-- จบ <tr> -->
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="px-2 py-4">
-                        <BaseParagraph class="flex items-center">
-                          <div class="text-ellipsis max-w-[12rem]">
-                            {{ itemName }}
-                          </div>
-                          <span
-                            class="text-xs text-muted-400 text-sky-500 text-center"
-                          >
-                            &nbsp; ราคารวมภาษีแล้ว</span
-                          ></BaseParagraph
-                        >
-                      </td>
-                      <td class="px-2 py-4">
-                        <BaseInput v-model="itemHours" placeholder="0" />
-                      </td>
-                      <td class="px-2 py-4">
-                        <BaseInput v-model="hourRate" placeholder="0.00" />
-                      </td>
-                      <td v-if="addDiscoundItem" class="px-2 py-4">
-                        <BaseButtonGroup>
-                          <BaseInput
-                            v-model="taxRate"
-                            placeholder="0"
-                            type="number"
-                          />
-                          <BaseSelect
-                            v-model="discountType"
-                            :classes="{
-                              wrapper: 'w-36',
-                            }"
-                          >
-                            <option value="bath">บาท</option>
+                    </div>
+                    <div class="mt-2 w-full">
+                      <BaseCheckbox
+                        v-model="addDiscoundItem"
+                        label="เพิ่มส่วนลด"
+                        rounded="sm"
+                      />
+                    </div>
+                  </BaseHeading>
+                  <div class="flex-auto w-full">
+                    <BaseInput
+                      v-model="itemHours"
+                      disabled
+                      label="ราคาสินค้า"
+                      type="number"
+                    />
+                  </div>
+                  <div class="flex-auto w-full">
+                    <BaseInput v-model="hourRate" label="จำนวน" type="number" />
+                  </div>
 
-                            <option value="percen">%</option>
-                          </BaseSelect>
-                        </BaseButtonGroup>
-                      </td>
-                      <td class="px-2 py-4">
-                        <BaseInput
-                          v-model="itemSubtotal"
-                          placeholder="0.00"
-                          readonly
-                        />
-                      </td>
-                      <td class="px-2 py-4">
-                        <BaseDropdown
-                          variant="context"
-                          label="Dropdown"
-                          placement="bottom-end"
-                          rounded="md"
-                        >
-                          <BaseDropdownItem
-                            title="เพิ่มส่วนลด"
-                            @click="addDiscoundItem = !addDiscoundItem"
-                            rounded="md"
-                          />
-                        </BaseDropdown>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  <div class="sm:flex flex-auto w-full gap-4">
+                    <BaseButtonGroup
+                      v-if="addDiscoundItem"
+                      class="flex items-end w-full"
+                    >
+                      <BaseButton color="muted">
+                        <span>฿</span>
+                      </BaseButton>
+                      <BaseInput
+                        v-model="taxRate"
+                        label="ส่วนลด"
+                        type="number"
+                      />
+                      <BaseSelect
+                        v-model="discountType"
+                        :classes="{
+                          wrapper: 'w-36',
+                        }"
+                      >
+                        <option value="bath">บาท</option>
 
-                <div>
+                        <option value="percen">%</option>
+                      </BaseSelect>
+                    </BaseButtonGroup>
+                    <div class="sm:flex-auto">
+                      <BaseInput
+                        label="ราคารวม"
+                        v-model="itemSubtotal"
+                        readonly
+                      />
+                    </div>
+                  </div>
+
+                  <!-- END item table -->
+                </BaseCard>
+                <div class="mt-3">
                   <button
                     type="button"
                     class="text-primary-500 flex items-center gap-1 underline-offset-4 hover:underline"
                   >
                     <Icon name="lucide:plus" class="size-4" />
                     <BaseText size="xs" weight="semibold">
-                      Add a new item
+                      เพิ่มสินค้า
                     </BaseText>
                   </button>
                 </div>
               </div>
               <div class="w-full pt-8">
                 <div class="grid grid-cols-1 gap-12">
-                  <!--Payment method-->
-                  <!-- <div>
-                    <div class="mb-6 flex items-center justify-between">
-                      <BaseHeading
-                        weight="medium"
-                        size="sm"
-                        class="text-muted-800 dark:text-muted-100"
-                      >
-                        Payment method
-                      </BaseHeading>
-                      <BaseButtonIcon rounded="lg" size="sm">
-                        <Icon name="lucide:edit-2" class="size-4" />
-                      </BaseButtonIcon>
-                    </div>
-                    <div class="bg-muted-100 dark:bg-muted-900 rounded-xl p-6">
-                      <div class="mb-6 flex items-center justify-between">
-                        <div>
-                          <BaseHeading as="h4" size="sm"> Paypal </BaseHeading>
-                        </div>
-                        <div>
-                          <Icon name="logos:paypal" class="size-6" />
-                        </div>
-                      </div>
-                      <div class="space-y-1">
-                        <div class="flex items-center justify-between">
-                          <BaseParagraph size="sm" class="text-muted-400">
-                            Name
-                          </BaseParagraph>
-                          <BaseParagraph
-                            size="sm"
-                            weight="semibold"
-                            class="text-muted-800 dark:text-muted-100"
-                          >
-                            Kendra Wilson
-                          </BaseParagraph>
-                        </div>
-                        <div class="flex items-center justify-between">
-                          <BaseParagraph size="sm" class="text-muted-400">
-                            Account
-                          </BaseParagraph>
-                          <BaseParagraph
-                            size="sm"
-                            weight="medium"
-                            class="text-muted-800 dark:text-muted-100"
-                          >
-                            3524 65456 3245 4869
-                          </BaseParagraph>
-                        </div>
-                        <div class="flex items-center justify-between">
-                          <BaseParagraph size="sm" class="text-muted-400">
-                            Routing
-                          </BaseParagraph>
-                          <BaseParagraph
-                            size="sm"
-                            weight="medium"
-                            class="text-muted-800 dark:text-muted-100"
-                          >
-                            4238293
-                          </BaseParagraph>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
                   <!--Total-->
                   <div class="flex h-full w-full flex-col">
                     <div class="mb-6 space-y-2">
@@ -556,14 +430,14 @@ useHead({
 });
 
 const pdfAttachment = ref(true);
-const itemName = ref("UI/UX Design");
-const itemHours = ref(20);
-const hourRate = ref(50.45);
+const itemName = ref("Apple MacBook Air");
+const itemHours = ref(56000);
+const hourRate = ref(1);
 const taxRate = ref(6.5);
 const discountType = ref("bath");
 
 const previewInvoice = ref(false);
-const addDiscoundItem = ref(false);
+const addDiscoundItem = ref<Boolean>(false);
 
 const itemSubtotal = computed(() =>
   (

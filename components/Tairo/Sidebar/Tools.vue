@@ -12,7 +12,7 @@ const app = useAppConfig();
     >
       <Icon name="lucide:mail" class="-ms-1 size-4" />
 
-      <span class="text-xs">e-tax พร้อมใช้งาน</span>
+      <span class="text-xs">E-TAX พร้อมใช้งาน</span>
     </BaseTag>
     <!-- <BaseThemeToggle></BaseThemeToggle> -->
     <TairoAccountMenu :horizontal="true" />
