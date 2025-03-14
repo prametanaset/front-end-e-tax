@@ -42,3 +42,7 @@
 .nui-tab-slider.nui-tabs-md.nui-tabs-three-slots .nui-tab-slider-track {
   max-width: 100% !important;
 }
+
+.nui-accordion {
+  border-width: 0px !important;
+}
