@@ -422,7 +422,6 @@ const route = useRoute();
 definePageMeta({
   title: "Invoice Page",
   description: "สร้างใบกำกับภาษี",
-  layout: "custom",
 });
 
 useHead({

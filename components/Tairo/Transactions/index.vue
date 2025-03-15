@@ -4,17 +4,17 @@
     <BaseHeading weight="medium" class="text-muted-800 dark:text-muted-100">
       รายการใบกำกับภาษี
     </BaseHeading>
-    <div class="w-full max-w-[100%] mt-3">
-      <BaseTabSlider v-slot="{ activeValue }" weg model-value="team" rounded="sm" :tabs="[
+    <div v-if="false" class="w-full max-w-[100%] mt-3">
+      <CustomBaseTabSlider v-slot="{ activeValue }" weg model-value="team" rounded="sm" :tabs="[
         { label: 'ทั้งหมด', value: 'team' },
         { label: 'เพิ่มหนี้/ลดหนี้', value: 'projects' },
         { label: 'ใบกำกับภาษี', value: 'tasks' },
       ]" class="font-normal">
-      </BaseTabSlider>
+      </CustomBaseTabSlider>
     </div>
 
-    <div class="flex items-center justify-between gap-0 mb-4">
-      <div class="max-w-[60%]">
+    <div class="flex items-center justify-between gap-2 xs:gap-1 mb-4 mt-3">
+      <div class="flex-auto">
         <BaseInput icon="lucide:search" size="md" rounded="md" label="" placeholder="ค้นหาใบแจ้งหนี้">
           <!-- reset data -->
           <template #action v-if="false">
@@ -27,32 +27,33 @@
         </BaseInput>
       </div>
 
-      <div class="max-w-[40%]">
-        <NuxtLink to="/invoice/create/invoice">
+      <div :class="screenWidth < 365 ? 'min-w-[100px]' : ''">
+        <!-- <NuxtLink to="/invoice/create/invoice">
           <button
             class="bg-purple-500 hover:bg-gray-400 text-gray-800 py-2 px-1 pr-2 rounded-lg inline-flex items-center ">
             <Icon name="lucide:plus" class="fill-current w-4 h-4 mr-1 text-white" />
             <span class="text-sm my-[2px] text-white">สร้างใบกำกับภาษี</span>
           </button>
-        </NuxtLink>
+        </NuxtLink> -->
+        <TairoTransactionsFilter />
       </div>
     </div>
 
     <!-- <div class="col-span-12 -mx-4 -mb-5"> -->
 
-    <div class="col-span-12 -mx-2">
-      <BaseCard rounded="md" class="p-3">
+    <div class="col-span-12 -mx-1">
+      <BaseCard rounded="md" class="p-3 pt-0">
         <div
-          class="mb-2 pb-3 flex items-center justify-between  dark:border-slate-700 bg-transparent">
+          class="flex items-center justify-between  dark:border-slate-700 bg-transparent">
           <div>
-            <button
+            <!-- <button
               class="bg-gray-100 hover:bg-gray-400 text-gray-600 font-semibold py-1 dark:bg-slate-700 px-2 rounded-lg inline-flex items-center">
 
               <span class="text-xs mt-1  dark:text-white">CSV</span>
               <Icon name="lucide:arrow-down-to-line" class="fill-current w-3 h-3 ml-1 dark:text-white" />
-            </button>
+            </button> -->
           </div>
-          <TairoTransactionsFilter />
+          
         </div>
         <div v-if="false" class="space-y-1">
           <!--Item-->
@@ -184,7 +185,7 @@ const accordion = ref([
     status: 3,
     content: {
       id: "INV0001-01-001",
-      subject: "ใบกำกับภาษี ค่าบริการเดือนกันยายน 2566",
+      subject: "ใบกำกับภาษี",
       createdAt: "30 สิงหาคม 2566 15:47 น.",
       updatedAt: "2 กันยายน 2566 02:29 น."
     }
@@ -195,7 +196,7 @@ const accordion = ref([
     status: 2,
     content: {
       id: "INV0002-01-002",
-      subject: "ใบลดหนี้ ค่าบริการเดือนตุลาคม 2566",
+      subject: "ใบลดหนี้",
       createdAt: "5 ตุลาคม 2566 10:15 น.",
       updatedAt: "7 ตุลาคม 2566 18:45 น."
     }
@@ -206,7 +207,7 @@ const accordion = ref([
     status: 1,
     content: {
       id: "INV0003-01-003",
-      subject: "ใบกำกับภาษี ค่าธรรมเนียมสมาชิกประจำปี",
+      subject: "ใบกำกับภาษี",
       createdAt: "12 มกราคม 2567 08:30 น.",
       updatedAt: "15 มกราคม 2567 14:10 น."
     }
@@ -217,7 +218,7 @@ const accordion = ref([
     status: 3,
     content: {
       id: "INV0004-01-004",
-      subject: "ใบเพิ่มหนี้ ค่าบริการสนับสนุนทางเทคนิค",
+      subject: "ใบเพิ่มหนี้",
       createdAt: "20 กุมภาพันธ์ 2567 16:20 น.",
       updatedAt: "22 กุมภาพันธ์ 2567 09:55 น."
     }
@@ -228,7 +229,7 @@ const accordion = ref([
     status: 2,
     content: {
       id: "INV0005-01-005",
-      subject: "ใบกำกับภาษี ค่าพัฒนาเว็บไซต์",
+      subject: "ใบกำกับภาษี",
       createdAt: "28 มีนาคม 2567 12:05 น.",
       updatedAt: "30 มีนาคม 2567 17:30 น."
     }
@@ -239,7 +240,7 @@ const accordion = ref([
     status: 3,
     content: {
       id: "INV0006-01-006",
-      subject: "ใบลดหนี้ ค่าบริการออกแบบ UX/UI",
+      subject: "ใบลดหนี้",
       createdAt: "10 เมษายน 2567 11:45 น.",
       updatedAt: "12 เมษายน 2567 20:10 น."
     }
@@ -250,7 +251,7 @@ const accordion = ref([
     status: 2,
     content: {
       id: "INV0007-01-007",
-      subject: "ใบเพิ่มหนี้ ค่าบริการให้คำปรึกษาทางธุรกิจ",
+      subject: "ใบเพิ่มหนี้",
       createdAt: "15 พฤษภาคม 2567 09:30 น.",
       updatedAt: "17 พฤษภาคม 2567 15:40 น."
     }
@@ -261,7 +262,7 @@ const accordion = ref([
     status: 1,
     content: {
       id: "INV0008-01-008",
-      subject: "ใบกำกับภาษี ค่าธรรมเนียมลิขสิทธิ์ซอฟต์แวร์",
+      subject: "ใบกำกับภาษี",
       createdAt: "25 มิถุนายน 2567 14:50 น.",
       updatedAt: "28 มิถุนายน 2567 19:05 น."
     }
@@ -272,7 +273,7 @@ const accordion = ref([
     status: 3,
     content: {
       id: "INV0009-01-009",
-      subject: "ใบลดหนี้ ค่าติดตั้งระบบเครือข่าย",
+      subject: "ใบลดหนี้",
       createdAt: "10 กรกฎาคม 2567 07:10 น.",
       updatedAt: "12 กรกฎาคม 2567 11:20 น."
     }
@@ -283,13 +284,27 @@ const accordion = ref([
     status: 2,
     content: {
       id: "INV0010-01-010",
-      subject: "ใบเพิ่มหนี้ ค่าที่ปรึกษาด้านการตลาด",
+      subject: "ใบเพิ่มหนี้",
       createdAt: "1 สิงหาคม 2567 18:25 น.",
       updatedAt: "3 สิงหาคม 2567 22:15 น."
     }
   }
-
 ])
+
+const screenWidth = ref(0); // Start with 0 or a default value
+
+const updateWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  updateWidth(); // Set initial width
+  window.addEventListener("resize", updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWidth);
+});
 </script>
 
 <style></style>

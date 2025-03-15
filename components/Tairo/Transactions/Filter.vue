@@ -4,7 +4,7 @@
       variant="button"
       label="ตัวกรอง"
       placement="bottom-start"
-      buttonSize="sm"
+      buttonSize="md"
     >
       <BaseDropdownItem
         to="#"

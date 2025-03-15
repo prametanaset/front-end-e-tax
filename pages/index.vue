@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-[1440px] m-auto">
     <div
+      v-if="!device.isMobile"
       class="grid gap-4 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mb-[60px]"
     >
       <BaseCard shadow="flat" class="p-3 rounded w-full">
@@ -40,6 +41,54 @@
       </BaseCard>
     </div>
 
+    <div
+      v-else
+      class="flex items-center justify-start snap-x snap-mandatory gap-6 overflow-x-auto pb-14 -m-3 invisible-scrollbar"
+    >
+    <div class="shrink-0"><div class="w-0 shrink-0"></div></div>
+      <div class="shrink-0 snap-center">
+        <BaseCard shadow="flat" class="p-3 h-40 w-80 shrink-0 rounded-lg">
+          <Widget
+            class="w-full"
+            :title="'Widget name'"
+            :count-number="5"
+            :percen-last-month="-7.5"
+          />
+        </BaseCard>
+      </div>
+      <div class="shrink-0 snap-center">
+        <BaseCard shadow="flat" class="p-3 h-40 w-80 shrink-0 rounded-lg">
+          <Widget
+            class="w-full"
+            :title="'Widget name'"
+            :count-number="5"
+            :percen-last-month="-7.5"
+          />
+        </BaseCard>
+      </div>
+      <div class="shrink-0 snap-center">
+        <BaseCard shadow="flat" class="p-3 h-40 w-80 shrink-0 rounded-lg">
+          <Widget
+            class="w-full"
+            :title="'Widget name'"
+            :count-number="5"
+            :percen-last-month="-7.5"
+          />
+        </BaseCard>
+      </div>
+      <div class="shrink-0 snap-center">
+        <BaseCard shadow="flat" class="p-3 h-40 w-80 shrink-0 rounded-lg">
+          <Widget
+            class="w-full"
+            :title="'Widget name'"
+            :count-number="5"
+            :percen-last-month="-7.5"
+          />
+        </BaseCard>
+      </div>
+      <div class="shrink-0"><div class="w-0 shrink-0"></div></div>
+    </div>
+
     <div>
       <Table v-if="screenWidth >= 768" />
       <TairoTransactions v-else class="mb-4" />
@@ -50,14 +99,14 @@
 <script lang="ts" setup>
 definePageMeta({
   title: "Home Page",
-  description: "รายงานใบแจ้งหนี้",
-  layout: "custom",
+  description: "รายงานใบกำกับภาษี",
 });
 
 useHead({
   title: "e-tax | Dashboard",
 });
 
+const device = useDevice();
 const screenWidth = ref(0); // Start with 0 or a default value
 
 const updateWidth = () => {
@@ -72,6 +121,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", updateWidth);
 });
+
+
 </script>
 
-<style></style>
+<style>
+
+</style>

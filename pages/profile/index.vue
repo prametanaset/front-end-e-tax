@@ -416,7 +416,6 @@ import { z } from "zod";
 definePageMeta({
   title: "Profile",
   description: "โปรไฟล์",
-  layout: "custom",
 });
 
 // This is the object that will contain the validation messages

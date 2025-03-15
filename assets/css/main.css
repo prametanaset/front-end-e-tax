@@ -18,9 +18,9 @@
   white-space: nowrap;
   overflow: hidden;
 }
-.nui-tab-slider.nui-tabs-default .nui-tab-slider-item:not(.nui-active) {
+/* .nui-tab-slider.nui-tabs-default .nui-tab-slider-item:not(.nui-active) {
   color: rgb(25 25 25) !important;
-}
+} */
 
 .nui-tab-slider .nui-tab-slider-track {
   background-color: rgb(236 240 243) !important;
@@ -45,4 +45,12 @@
 
 .nui-accordion {
   border-width: 0px !important;
+}
+
+.nui-tab-slider.nui-tabs-default .nui-tab-slider-naver {
+  border-width: 0px;
+}
+
+.invisible-scrollbar::-webkit-scrollbar {
+  display: none;
 }

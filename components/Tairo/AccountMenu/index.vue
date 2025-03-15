@@ -3,26 +3,18 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 const props = defineProps<{
   horizontal?: boolean;
+  mobile?: boolean;
 }>();
 </script>
 
 <template>
-  <div class="group inline-flex items-center justify-center text-right">
-    <!-- <div class="ms-3 leading-none ">
-      <h4 class="font-sans text-sm font-medium">
-        Maya Rosselini
-      </h4>
-
-      <p class="text-muted-400 font-sans text-xs font-normal">
-        Product Manager
-      </p>
-    </div> -->
-
-    <Menu v-slot="{ close }" as="div" class="relative z-20 size-10 text-start">
+  <div class="group inline-flex items-center justify-center" :class="props.mobile ? '' : 'text-right'">
+    <Menu v-slot="{ close }" as="div" class="relative z-20" :class="props.mobile ? 'h-[2rem] w-[2rem]' : 'size-10 text-start'">
       <MenuButton as="template">
         <button
           type="button"
-          class="group-hover:ring-primary-500 dark:ring-offset-muted-800 inline-flex size-10 items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4"
+          :class="props.mobile ? 'size-7' : 'size-10'"
+          class="group-hover:ring-primary-500 dark:ring-offset-muted-800 inline-flex items-center justify-center rounded-full ring-1 ring-transparent transition-all duration-300 group-hover:ring-offset-4"
         >
           <div
             class="relative inline-flex size-10 items-center justify-center rounded-full"
@@ -46,7 +38,7 @@ const props = defineProps<{
       >
         <MenuItems
           class="z-10 border-muted-200 dark:border-muted-700 dark:bg-muted-800 absolute mt-2 w-60 origin-bottom-right rounded-md border bg-white text-left shadow-lg focus:outline-none"
-          :class="props.horizontal ? 'top-10 end-0' : 'bottom-0 -end-64'"
+        :class="props.horizontal ? 'top-10 end-0' : 'bottom-[60px] -end-5'"
         >
           <div class="bg-muted-50 dark:bg-muted-700/40 p-6">
             <div class="flex items-center">

@@ -186,8 +186,9 @@ const actions = {
   plus: "nui-accordion-plus",
 };
 
+const accordionContent = ref(null);
 const internalOpenItems = ref(props.openItems);
-const toggle = (key: number) => {
+const toggle = async (key: number) => {
   const wasOpen = internalOpenItems.value.includes(key);
 
   if (props.exclusive) {
@@ -202,6 +203,7 @@ const toggle = (key: number) => {
   }
 
   if (wasOpen) {
+    await beforeLeave(accordionContent.value);
     internalOpenItems.value.splice(internalOpenItems.value.indexOf(key), 1);
   } else {
     emits("open", props.items[key]);
@@ -230,24 +232,18 @@ const statusChecking = computed(() => {
   };
 });
 
-const beforeEnter = (el) => {
-  el.style.height = "0px";
-  el.style.opacity = "0";
+const beforeLeave = (el) => {
+  return new Promise((resolve) => {
+    el.style.maxHeight = el.scrollHeight + "px"; // Start at full height
+    requestAnimationFrame(() => {
+      el.style.transition = "max-height 0.3s ease, opacity 0.3s ease";
+      el.style.maxHeight = "0px";
+      el.style.opacity = "0";
+      setTimeout(resolve, 300); // Ensure Vue removes it after animation
+    });
+  });
 };
 
-const enter = (el, done) => {
-  el.style.transition = "height 0.3s ease, opacity 0.3s ease";
-  el.style.height = el.scrollHeight + 22 + "px";
-  el.style.opacity = "1";
-  setTimeout(done, 300);
-};
-
-const leave = (el, done) => {
-  el.style.transition = "height 0.3s ease, opacity 0.3s ease";
-  el.style.height = "0px";
-  el.style.opacity = "0";
-  setTimeout(done, 300);
-};
 </script>
 
 <template>
@@ -271,7 +267,7 @@ const leave = (el, done) => {
       >
         <slot name="accordion-item" :item="item" :index="key" :toggle="toggle">
           <summary
-            class="nui-accordion-summary"
+            class="nui-accordion-summary border-b-[1px] border-neutral-110 shadow-sm"
             :class="props.classes?.summary"
             tabindex="0"
             @click.prevent="() => toggle(key)"
@@ -288,24 +284,24 @@ const leave = (el, done) => {
                     <BaseHeading
                       as="h4"
                       size="sm"
-                      weight="normal"
+                      weight="semibold"
                       lead="none"
                       class="nui-accordion-header-inner w-full"
                     >
                       {{ item.title }}
                       <span
                         v-if="item.status == 3"
-                        class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset"
+                        class="ml-2 inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 "
                         >{{ statusChecking(item.status).message }}</span
                       >
                       <span
                         v-if="item.status == 2"
-                        class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-yellow-600/20 ring-inset"
+                        class="ml-2 inline-flex items-center rounded-full bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 "
                         >{{ statusChecking(item.status).message }}</span
                       >
                       <span
                         v-if="item.status == 1"
-                        class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset"
+                        class="ml-2 inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 "
                         >{{ statusChecking(item.status).message }}</span
                       >
                     </BaseHeading>
@@ -339,16 +335,12 @@ const leave = (el, done) => {
               </div>
             </slot>
           </summary>
-          <transition
-            name="accordion"
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @leave="leave"
-          >
+          <Transition name="accordion">
             <div
               v-if="internalOpenItems[0] == key"
-              class="nui-accordion-content pt-3 pb-4 bg-slate-50 border-t-gray-200 border-t-[1px] border-b-8 border-[#f1f5f9]"
+              class="nui-accordion-content pt-3 pb-4 border-t-gray-200 border-t-[1px] border-b-[1rem] border-[#f1f5f9]"
               :class="props.classes?.content"
+              ref="accordionContent"
             >
               <slot
                 name="accordion-item-content"
@@ -419,9 +411,40 @@ const leave = (el, done) => {
                 </div>
               </slot>
             </div>
-          </transition>
+          </Transition>
         </slot>
       </details>
     </div>
   </BaseFocusLoop>
 </template>
+
+<style scoped>
+/* Enter animation (expanding the accordion) */
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.accordion-enter-from {
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordion-enter-to {
+  max-height: 500px; /* Adjust max-height based on content */
+  opacity: 1;
+}
+
+/* Leave animation (collapsing the accordion) */
+.accordion-leave-from {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.accordion-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+
+</style>
