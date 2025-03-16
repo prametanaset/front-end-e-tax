@@ -23,16 +23,30 @@ const showNavBurger = computed(() => {
     && hasSubsidebar.value
   )
 })
+
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = document.documentElement.scrollTop > 1
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
   <div
-    class=" z-[1] flex h-16 items-center gap-2 sticky top-0"
-    :class="props.horizontalScroll && 'pe-4 xl:pe-10'"
+    class=" z-[50] flex h-14 items-center gap-2 sticky top-0 bg-muted-100 dark:bg-muted-900 -mx-4 px-4"
+    :class="{ 'shadow-sm': isScrolled }"
   >
     <!-- <TairoSidebarBurger v-if="true" class="-ms-3  " /> -->
     <img src="https://www.scb10x.com/images/logo.png" alt="logo scb10x" class="h-10 me-3" />
-
+      {{  }}
 
     <!-- <BaseHeading
       v-if="app.tairo?.sidebar?.toolbar?.showTitle" -->

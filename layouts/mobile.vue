@@ -1,7 +1,9 @@
 <template>
   <div>
+    <ToastPwaInstall v-if="$pwa.showInstallPrompt" class="jqbox_innerhtml bottom-20 z-20 shadow-lg" :icon="'lucide:download'" :title="'ติดตั้งแอพริเคชั่น e-TAX'" :text="'เพิ่มแอปนี้ลงในหน้าจอหลักของคุณ เพื่อความสะดวกในการใช้งานและเข้าถึงได้อย่างรวดเร็ว!'" :confirmButton="'ติดตั้ง'" :cancelButton="'ไว้ทีหลัง'"/>
+
     <div
-      class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white/80 border-t border-gray-200 dark:bg-gray-700/30 dark:border-gray-600 backdrop-blur-lg">
+      class="fixed bottom-0 left-0 z-50 w-full h-16 bg-white/80 border-t border-gray-200 dark:bg-gray-700/30 dark:border-gray-600 backdrop-blur-2xl">
       <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
 
         <!-- Home -->
@@ -45,7 +47,7 @@
           <TairoSidebarToolbarMobile></TairoSidebarToolbarMobile>
         </slot>
       <h1
-        class="max-w-[1440px] m-auto my-4 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white">
+        class="max-w-[1440px] m-auto mt-4 mb-5 nui-heading nui-heading-2xl nui-weight-medium nui-lead-normal text-muted-800 dark:text-white">
         {{ route.meta.description }}
       </h1>
       <slot></slot>
@@ -58,4 +60,15 @@ const route = useRoute();
 
 </script>
 
-<style></style>
+<style scoped>
+.fixed-center {
+  margin: 5% auto;
+}
+
+.jqbox_innerhtml {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+</style>

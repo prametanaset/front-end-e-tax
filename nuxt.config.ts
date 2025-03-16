@@ -32,9 +32,42 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@nuxtjs/google-fonts",
     "@samk-dev/nuxt-vcalendar",
-    "@nuxtjs/device"
+    "@nuxtjs/device",
+    "@vite-pwa/nuxt",
   ],
+  pwa: {
+    registerType: 'autoUpdate',
+    
+    // เปิดใช้งาน (หรือทดสอบ) ในโหมด Dev
+    devOptions: {
+      enabled: true, // ทำให้ในโหมด Dev สามารถโหลด Service Worker/PWA ได้
+      type: 'module'
+    },
 
+    // เปิด Plugin ฝั่ง Client
+    client: {
+      registerPlugin: true,
+      installPrompt: true, // หากต้องการ intercept beforeinstallprompt และใช้ showInstallPrompt
+    },
+
+    manifest: {
+      name: "My Awesome App",
+      short_name: "AwesomeApp",
+      theme_color: "#f1f5f9",
+      icons: [
+        {
+          src: "/Icon.png",
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: "/Icon.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
+    },
+  },
   colorMode: {
     preference: "system", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found

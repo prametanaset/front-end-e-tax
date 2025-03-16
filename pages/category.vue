@@ -18,11 +18,15 @@
     <p>isChrome: {{ device.isChrome ? '✅':'❌' }}</p>
     <p>isSamsung: {{ device.isSamsung ? '✅':'❌' }}</p>
     <p>isCrawler: {{ device.isCrawler ? '✅':'❌' }}</p>
-    
+
+    <Accordion />
+    <!-- <Toast v-if="$pwa.showInstallPrompt" /> -->
   </div>
 </template>
 
 <script lang="ts" setup>
+// const { $pwa } = useNuxtApp()
+
 definePageMeta({
   title: 'Category Page',
   description: 'รายการสินค้า',

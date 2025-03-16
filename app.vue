@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout :name="$device.isMobile ? 'mobile' : 'custom'">
+    <NuxtPwaManifest />
     <NuxtPage />
   </NuxtLayout>
 </template>
