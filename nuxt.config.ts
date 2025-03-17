@@ -37,17 +37,16 @@ export default defineNuxtConfig({
   ],
   pwa: {
     registerType: 'autoUpdate',
-    
-    // เปิดใช้งาน (หรือทดสอบ) ในโหมด Dev
+    registerWebManifestInRouteRules: true,
+
     devOptions: {
-      enabled: true, // ทำให้ในโหมด Dev สามารถโหลด Service Worker/PWA ได้
+      enabled: false, 
       type: 'module'
     },
 
-    // เปิด Plugin ฝั่ง Client
     client: {
       registerPlugin: true,
-      installPrompt: true, // หากต้องการ intercept beforeinstallprompt และใช้ showInstallPrompt
+      installPrompt: true, 
     },
 
     manifest: {

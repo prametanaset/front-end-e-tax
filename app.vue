@@ -7,7 +7,5 @@
 
 <script setup>
 const $device = useDevice()
-definePageMeta({
-  layout: false
-})
+
 </script>
