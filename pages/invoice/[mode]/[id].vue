@@ -105,15 +105,20 @@
                   </BaseHeading>
                 </div>
               </div>
-              <div class="dark:border-white w-full overflow-x-auto">
+              <div class="grid gap-4 dark:border-white w-full">
                 <!-- item table -->
-                <BaseCard class="flex flex-col p-3 items-center">
+                <BaseCard
+                  v-for="(item, index) in itemsAddToBill"
+                  :key="index"
+                  class="flex flex-col p-3 items-center"
+                >
                   <BaseHeading
                     class="flex flex-col justify-start items-center w-full"
                   >
                     <div class="w-full text-2md">
-                      {{ itemName }}
+                      {{ item.itemName }}
                       <span
+                        v-if="item.isSumTax"
                         class="text-xs text-muted-400 text-sky-500 text-center"
                       >
                         &nbsp; *ราคารวมภาษีแล้ว</span
@@ -127,10 +132,16 @@
                       />
                     </div>
                   </BaseHeading>
+                  <div
+                    class="absolute right-2 top-2"
+                    data-nui-tooltip="ลบสินค้า"
+                  >
+                    <Icon name="bytesize:trash" class="text-rose-500" />
+                  </div>
                   <div class="sm:flex flex-auto w-full gap-4">
                     <div class="w-full">
                       <BaseInput
-                        v-model="itemHours"
+                        v-model="item.itemPrice"
                         disabled
                         label="ราคาสินค้า"
                         type="number"
@@ -138,7 +149,7 @@
                     </div>
                     <div class="w-full">
                       <BaseInput
-                        v-model="hourRate"
+                        v-model="item.qty"
                         label="จำนวน"
                         type="number"
                       />
@@ -152,13 +163,13 @@
                     >
                       <div class="w-full">
                         <BaseInput
-                          v-model="taxRate"
+                          v-model="item.discount"
                           label="ส่วนลด"
                           type="number"
                         />
                       </div>
                       <BaseSelect
-                        v-model="discountType"
+                        v-model="item.discountType"
                         :classes="{
                           wrapper: 'w-36',
                         }"
@@ -171,7 +182,7 @@
                     <div class="sm:flex-auto w-full">
                       <BaseInput
                         label="ราคารวม"
-                        v-model="itemSubtotal"
+                        v-model="item.itemTotalPrice"
                         readonly
                       />
                     </div>
@@ -185,17 +196,83 @@
                     class="text-primary-500 flex items-center gap-1 underline-offset-4 hover:underline"
                   >
                     <Icon name="lucide:plus" class="size-4" />
-                    <BaseText size="xs" weight="semibold">
+                    <BaseText
+                      size="xs"
+                      weight="semibold"
+                      @click="isModalAddItemOpen = !isModalAddItemOpen"
+                    >
                       เพิ่มสินค้า
                     </BaseText>
                   </button>
+                  <!-- Modal component -->
+                  <TairoModal
+                    :open="isModalAddItemOpen"
+                    size="md"
+                    @close="isModalAddItemOpen = false"
+                  >
+                    <template #header>
+                      <!-- Header -->
+                      <div
+                        class="flex w-full items-center justify-between p-4 md:p-6"
+                      >
+                        <h3
+                          class="font-heading text-muted-900 text-lg font-medium leading-6 dark:text-white"
+                        >
+                          เพิ่มสินค้า
+                        </h3>
+
+                        <BaseButtonClose @click="isModalAddItemOpen = false" />
+                      </div>
+                    </template>
+
+                    <!-- Body -->
+                    <div class="p-4 md:p-6">
+                      <BaseCard
+                        v-for="(item, index) in items"
+                        :key="index"
+                        @click="
+                          (tempItemsAddToBill = item), (isSelectItem = true)
+                        "
+                      >
+                        {{ item }}
+                      </BaseCard>
+                    </div>
+
+                    <template #footer>
+                      <!-- Footer -->
+                      <div class="p-4 md:p-6">
+                        <div class="flex gap-x-2">
+                          <BaseButton
+                            @click="
+                              (isModalAddItemOpen = false),
+                                (tempItemsAddToBill = [])
+                            "
+                          >
+                            ยกเลิก
+                          </BaseButton>
+
+                          <BaseButton
+                            color="primary"
+                            variant="solid"
+                            :disabled="!isSelectItem"
+                            @click="
+                              (isModalAddItemOpen = false),
+                                addItemToBill(tempItemsAddToBill)
+                            "
+                          >
+                            เพิ่ม
+                          </BaseButton>
+                        </div>
+                      </div>
+                    </template>
+                  </TairoModal>
                 </div>
               </div>
             </div>
           </BaseCard>
         </div>
       </div>
-      <div class="ltablet:col-span-4 col-span-12 lg:col-span-4">
+      <div class="ltablet:col-span-4 col-span-12 lg:col-span-4 relative">
         <div class="flex flex-col gap-6">
           <transition name="fade" mode="out-in">
             <!-- Preview invoice -->
@@ -263,7 +340,7 @@
                 </div>
               </BaseCard>
               <!--Amount-->
-              <BaseCard rounded="md" class="p-6">
+              <BaseCard rounded="md" class="p-6 sticky top-0 z-99">
                 <div class="w-full">
                   <div class="grid grid-cols-1 gap-12">
                     <!--Total-->
@@ -383,6 +460,17 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 
+interface Items {
+  itemId: number;
+  itemName: string;
+  itemPrice: number;
+  isSumTax: boolean;
+  discount: number;
+  discountType: string;
+  qty: number;
+  itemTotalPrice: number;
+}
+
 const route = useRoute();
 
 definePageMeta({
@@ -394,14 +482,25 @@ definePageMeta({
 //   title: `e-Tax | ${route.meta.description}`,
 // });
 
-const itemName = ref("Apple MacBook Air");
 const itemHours = ref(56000);
 const hourRate = ref(1);
 const taxRate = ref(6.5);
-const discountType = ref("bath");
 
 const previewInvoice = ref(false);
+const isModalAddItemOpen = ref(false);
 const addDiscoundItem = ref<Boolean>(false);
+const isSelectItem = ref(false);
+
+const items = ref([]);
+const itemsAddToBill = ref<Items[]>([]);
+const tempItemsAddToBill = ref<Items[]>([]);
+
+const { data, error } = await useFetch("/api/items");
+if (error.value) {
+  console.error("Error fetching items:", error.value);
+} else {
+  items.value = data.value.items;
+}
 
 const itemSubtotal = computed(() =>
   (
@@ -409,4 +508,10 @@ const itemSubtotal = computed(() =>
     itemHours.value * hourRate.value * (taxRate.value / 100)
   ).toFixed(2)
 );
+
+const addItemToBill = (data: Items) => {
+  itemsAddToBill.value.push(data);
+  tempItemsAddToBill.value = [];
+  isSelectItem.value = false;
+};
 </script>
