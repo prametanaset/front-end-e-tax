@@ -4,7 +4,6 @@ export const convertToBuddhistYear = (date: any) => {
 };
 
 export const formatThaiDate = (date: any) => {
-  console.log(date);
   if (!date || date === "") return "";
 
   const thaiMonths = [
@@ -27,4 +26,11 @@ export const formatThaiDate = (date: any) => {
   const year = convertToBuddhistYear(date);
 
   return `${day} ${month} ${year}`;
+};
+
+export const currencyFormat = (number: any) => {
+  return Number(number).toLocaleString("th-TH", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 };

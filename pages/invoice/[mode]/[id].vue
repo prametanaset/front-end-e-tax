@@ -105,13 +105,9 @@
                   </BaseHeading>
                 </div>
               </div>
-              <div
-                class="border-muted-200 dark:border-white w-full overflow-x-auto border-b pb-8"
-              >
+              <div class="dark:border-white w-full overflow-x-auto">
                 <!-- item table -->
-                <BaseCard
-                  class="sm:flex flex-col xs:flex-row p-3 gap-4 items-center"
-                >
+                <BaseCard class="flex flex-col p-3 items-center">
                   <BaseHeading
                     class="flex flex-col justify-start items-center w-full"
                   >
@@ -131,31 +127,36 @@
                       />
                     </div>
                   </BaseHeading>
-                  <div class="flex-auto w-full">
-                    <BaseInput
-                      v-model="itemHours"
-                      disabled
-                      label="ราคาสินค้า"
-                      type="number"
-                    />
-                  </div>
-                  <div class="flex-auto w-full">
-                    <BaseInput v-model="hourRate" label="จำนวน" type="number" />
+                  <div class="sm:flex flex-auto w-full gap-4">
+                    <div class="w-full">
+                      <BaseInput
+                        v-model="itemHours"
+                        disabled
+                        label="ราคาสินค้า"
+                        type="number"
+                      />
+                    </div>
+                    <div class="w-full">
+                      <BaseInput
+                        v-model="hourRate"
+                        label="จำนวน"
+                        type="number"
+                      />
+                    </div>
                   </div>
 
                   <div class="sm:flex flex-auto w-full gap-4">
-                    <BaseButtonGroup
+                    <div
                       v-if="addDiscoundItem"
-                      class="flex items-end w-full"
+                      class="flex flex-row items-end w-full gap-4"
                     >
-                      <BaseButton color="muted">
-                        <span>฿</span>
-                      </BaseButton>
-                      <BaseInput
-                        v-model="taxRate"
-                        label="ส่วนลด"
-                        type="number"
-                      />
+                      <div class="w-full">
+                        <BaseInput
+                          v-model="taxRate"
+                          label="ส่วนลด"
+                          type="number"
+                        />
+                      </div>
                       <BaseSelect
                         v-model="discountType"
                         :classes="{
@@ -166,8 +167,8 @@
 
                         <option value="percen">%</option>
                       </BaseSelect>
-                    </BaseButtonGroup>
-                    <div class="sm:flex-auto">
+                    </div>
+                    <div class="sm:flex-auto w-full">
                       <BaseInput
                         label="ราคารวม"
                         v-model="itemSubtotal"
@@ -188,79 +189,6 @@
                       เพิ่มสินค้า
                     </BaseText>
                   </button>
-                </div>
-              </div>
-              <div class="w-full pt-8">
-                <div class="grid grid-cols-1 gap-12">
-                  <!--Total-->
-                  <div class="flex h-full w-full flex-col">
-                    <div class="mb-6 space-y-2">
-                      <div class="mb-6 flex items-center justify-between">
-                        <BaseHeading
-                          weight="medium"
-                          size="sm"
-                          class="text-muted-800 dark:text-muted-100"
-                        >
-                          Amount billed
-                        </BaseHeading>
-                        <BaseButtonIcon rounded="lg" size="sm">
-                          <Icon name="lucide:printer" class="size-4" />
-                        </BaseButtonIcon>
-                      </div>
-                      <div class="flex items-center justify-between">
-                        <BaseParagraph size="sm" class="text-muted-400">
-                          Subtotal
-                        </BaseParagraph>
-                        <BaseParagraph
-                          size="sm"
-                          weight="semibold"
-                          class="text-muted-800 dark:text-muted-100"
-                        >
-                          {{ 1525.18 }}
-                        </BaseParagraph>
-                      </div>
-                      <div class="flex items-center justify-between">
-                        <BaseParagraph size="sm" class="text-muted-400">
-                          Discount
-                        </BaseParagraph>
-                        <BaseParagraph
-                          size="sm"
-                          weight="semibold"
-                          class="text-muted-800 dark:text-muted-100"
-                        >
-                          {{ 0.0 }}
-                        </BaseParagraph>
-                      </div>
-                      <div class="flex items-center justify-between">
-                        <BaseParagraph size="sm" class="text-muted-400">
-                          ภาษี
-                        </BaseParagraph>
-                        <BaseParagraph
-                          size="sm"
-                          weight="semibold"
-                          class="text-muted-800 dark:text-muted-100"
-                        >
-                          {{ 0.0 }}
-                        </BaseParagraph>
-                      </div>
-                    </div>
-                    <div class="mt-auto">
-                      <div
-                        class="border-muted-200 dark:border-white flex items-center justify-between border-t pt-6"
-                      >
-                        <BaseParagraph size="sm" class="text-muted-400">
-                          ราคารวม
-                        </BaseParagraph>
-                        <BaseParagraph
-                          size="sm"
-                          weight="semibold"
-                          class="text-muted-800 dark:text-muted-100"
-                        >
-                          {{ itemSubtotal }}
-                        </BaseParagraph>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -336,43 +264,81 @@
               </BaseCard>
               <!--Amount-->
               <BaseCard rounded="md" class="p-6">
-                <div class="mb-6">
-                  <BaseHeading
-                    weight="medium"
-                    size="md"
-                    lead="none"
-                    class="line-clamp-1"
-                  >
-                    Invoice amount
-                  </BaseHeading>
-                  <BaseParagraph size="xs" class="text-muted-400 line-clamp-1">
-                    Expressed in USD
-                  </BaseParagraph>
-                </div>
-                <div
-                  class="border-muted-200 dark:border-muted-200 border-b pb-4"
-                >
-                  <BaseHeading
-                    weight="semibold"
-                    size="2xl"
-                    lead="none"
-                    class="mb-3"
-                  >
-                    {{ Number(itemSubtotal).toLocaleString() }}
-                    <BaseText size="xs" class="text-muted-400 inline">
-                      (Tax incl.)
-                    </BaseText>
-                  </BaseHeading>
-                  <BaseTag rounded="full" variant="pastel" color="danger">
-                    Due on Apr 11, 2024
-                  </BaseTag>
-                </div>
-                <div class="flex items-center justify-between pt-4">
-                  <BaseText size="sm" class="text-muted-400">
-                    Attach PDF in mail
-                  </BaseText>
-                  <div>
-                    <BaseSwitchBall v-model="pdfAttachment" color="primary" />
+                <div class="w-full">
+                  <div class="grid grid-cols-1 gap-12">
+                    <!--Total-->
+                    <div class="flex h-full w-full flex-col">
+                      <div class="mb-6 space-y-2">
+                        <div class="mb-6 flex items-center justify-between">
+                          <BaseHeading
+                            weight="medium"
+                            size="lg"
+                            class="text-muted-800 dark:text-muted-100"
+                          >
+                            สรุปรายการ
+                          </BaseHeading>
+                          <BaseButtonIcon
+                            rounded="lg"
+                            size="sm"
+                            data-nui-tooltip="Print"
+                          >
+                            <Icon name="lucide:printer" class="size-4" />
+                          </BaseButtonIcon>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <BaseParagraph size="sm" class="text-muted-400">
+                            Subtotal
+                          </BaseParagraph>
+                          <BaseParagraph
+                            size="sm"
+                            weight="semibold"
+                            class="text-muted-800 dark:text-muted-100"
+                          >
+                            {{ currencyFormat(1525.18) }}
+                          </BaseParagraph>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <BaseParagraph size="sm" class="text-muted-400">
+                            Discount
+                          </BaseParagraph>
+                          <BaseParagraph
+                            size="sm"
+                            weight="semibold"
+                            class="text-muted-800 dark:text-muted-100"
+                          >
+                            {{ currencyFormat(0.0) }}
+                          </BaseParagraph>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <BaseParagraph size="sm" class="text-muted-400">
+                            ภาษี
+                          </BaseParagraph>
+                          <BaseParagraph
+                            size="sm"
+                            weight="semibold"
+                            class="text-muted-800 dark:text-muted-100"
+                          >
+                            {{ currencyFormat(0.0) }}
+                          </BaseParagraph>
+                        </div>
+                      </div>
+                      <div class="mt-auto">
+                        <div
+                          class="border-muted-200 dark:border-white flex items-center justify-between border-t pt-6"
+                        >
+                          <BaseParagraph size="sm" class="text-muted-400">
+                            ราคารวม
+                          </BaseParagraph>
+                          <BaseParagraph
+                            size="sm"
+                            weight="semibold"
+                            class="text-muted-800 dark:text-muted-100"
+                          >
+                            {{ currencyFormat(itemSubtotal) }}
+                          </BaseParagraph>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </BaseCard>
@@ -424,11 +390,10 @@ definePageMeta({
   description: "สร้างใบกำกับภาษี",
 });
 
-useHead({
-  title: `e-Tax | ${route.meta.description}`,
-});
+// useHead({
+//   title: `e-Tax | ${route.meta.description}`,
+// });
 
-const pdfAttachment = ref(true);
 const itemName = ref("Apple MacBook Air");
 const itemHours = ref(56000);
 const hourRate = ref(1);
