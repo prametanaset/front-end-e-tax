@@ -43,7 +43,7 @@
 
     <div
       v-else
-      class="flex items-center justify-start snap-x snap-mandatory gap-6 overflow-x-auto pb-14 -m-3 invisible-scrollbar"
+      class="flex items-center justify-start snap-x snap-mandatory gap-6 overflow-x-auto pb-14 -m-3 mt-3 invisible-scrollbar"
     >
     <div class="shrink-0"><div class="w-0 shrink-0"></div></div>
       <div class="shrink-0 snap-center">

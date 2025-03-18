@@ -80,9 +80,7 @@
       </div>
     </div>
 
-    <div class="fixed bottom-0 left-0 z-50 w-full px-4 py-1 bg-white/80 border-t border-gray-200 dark:bg-gray-700/30 dark:border-gray-600 backdrop-blur-2xl">
-        <TairoIconLinks />
-    </div>
+    
     <main class="p-4 pt-0 bg-muted-100 dark:bg-muted-900">
       <slot name="toolbar">
         <TairoSidebarToolbarMobile></TairoSidebarToolbarMobile>
@@ -94,6 +92,10 @@
       </h1>
       <slot></slot>
     </main>
+
+    <nav>
+      <TairoIconLinks />
+    </nav>
   </div>
 </template>
 
